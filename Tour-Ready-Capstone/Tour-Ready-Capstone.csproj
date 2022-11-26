@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Tour_Ready_Capstone</RootNamespace>
+    <UserSecretsId>6859dc47-96c5-4fe1-ade8-6f4b06862789</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
