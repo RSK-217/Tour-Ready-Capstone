@@ -9,7 +9,7 @@
         public string Venue { get; set; }
         public DateTime ShowDate { get; set; }
         public int CityId { get; set; }
-        public string CityName { get; set; }
+        public string City { get; set; }
         public string SetList { get; set; }
         public string ShowNotes { get; set; }
         public int MerchSales { get; set; }
