@@ -5,6 +5,11 @@ namespace Tour_Ready_Capstone.Interfaces
 {
     public interface IGroup
     {
+        public List<Group> GetAllGroups();
+        public Group GetGroupById(int id);
+        public Group CreateGroup(Group group);
+        public void UpdateGroup(Group group);
+        public void DeleteGroup(int id);
 
     }
 }

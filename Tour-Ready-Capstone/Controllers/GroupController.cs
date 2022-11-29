@@ -23,34 +23,40 @@ namespace Tour_Ready_Capstone.Controllers
 
         // GET: api/<GroupController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult GetAllGroups()
         {
-            return new string[] { "value1", "value2" };
+            var groups = _groupRepo.GetAllGroups();
+            return Ok(groups);
         }
 
         // GET api/<GroupController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult GetGroupById(int id)
         {
-            return "value";
+            var group = _groupRepo.GetGroupById(id);
+            return Ok(group);
         }
 
         // POST api/<GroupController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateGroup(Group group)
         {
+            var newGroup = _groupRepo.CreateGroup(group);
+            return Ok(newGroup);
         }
 
         // PUT api/<GroupController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateGroup(Group group)
         {
+            _groupRepo.UpdateGroup(group);
         }
 
         // DELETE api/<GroupController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _groupRepo.DeleteGroup(id);
         }
     }
 }
