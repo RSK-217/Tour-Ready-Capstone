@@ -35,29 +35,26 @@ namespace Tour_Ready_Capstone.Controllers
             return Ok(members);
         }
 
-        // GET api/<GroupMemberController>/5
-        //[HttpGet("{id}")]
-        //public string GetAllMembersByGroupId(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST api/<GroupMemberController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        [HttpPost]
+        public ActionResult CreateGroupMember(GroupMember groupMember)
+        {
+            var newMember = _groupMemberRepo.CreateGroupMember(groupMember);
+            return Ok(newMember);
+        }
 
         // PUT api/<GroupMemberController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPut("{id}")]
+        public void UpdateGroupMember(GroupMember groupMember)
+        {
+            _groupMemberRepo.UpdateGroupMember(groupMember);
+        }
 
         // DELETE api/<GroupMemberController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public void DeleteMember(int id)
+        {
+            _groupMemberRepo.DeleteMember(id);
+        }
     }
 }
