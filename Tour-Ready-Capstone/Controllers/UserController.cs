@@ -13,8 +13,7 @@ namespace Tour_Ready_Capstone.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUser _userRepo;
-        public UserController(
-        IUser userRepository)
+        public UserController(IUser userRepository)
 
         {
             _userRepo = userRepository;

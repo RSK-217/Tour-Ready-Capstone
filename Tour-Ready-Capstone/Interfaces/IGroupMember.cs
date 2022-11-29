@@ -5,5 +5,8 @@ namespace Tour_Ready_Capstone.Interfaces
 {
     public interface IGroupMember
     {
+        public List<GroupMember> GetMemberByUserId(int id);
+
+        public List<GroupMemberByGroupId> GetAllMembersByGroupId(int id);
     }
 }
