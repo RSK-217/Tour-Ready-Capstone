@@ -33,7 +33,7 @@ namespace Tour_Ready_Capstone.Repositories
                         var results = new List<GroupMemberByGroupId>();
                         while (reader.Read())
                         {
-                            var group = LoadFromDataTwo(reader);
+                            var group = LoadFromData(reader);
 
                             results.Add(group);
                         }
@@ -66,7 +66,7 @@ namespace Tour_Ready_Capstone.Repositories
                         List<GroupMemberByGroupId>? groupMembers = new List<GroupMemberByGroupId>();
                         while (reader.Read())
                         {
-                            GroupMemberByGroupId groupMember = LoadFromDataTwo(reader);
+                            GroupMemberByGroupId groupMember = LoadFromData(reader);
 
                             groupMembers.Add(groupMember);  
                         }
@@ -150,18 +150,7 @@ namespace Tour_Ready_Capstone.Repositories
         }
 
 
-        private GroupMember LoadFromData(SqlDataReader reader)
-        {
-            return new GroupMember
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                GroupId = reader.GetInt32(reader.GetOrdinal("GroupId")),
-                IsEditor = reader.GetBoolean(reader.GetOrdinal("IsEditor"))
-            };
-        }
-
-        private GroupMemberByGroupId LoadFromDataTwo(SqlDataReader reader)
+        private GroupMemberByGroupId LoadFromData(SqlDataReader reader)
         {
             return new GroupMemberByGroupId
             {
