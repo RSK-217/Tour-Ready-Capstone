@@ -123,7 +123,6 @@ namespace Tour_Ready_Capstone.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
-
         }
         private User LoadFromData(SqlDataReader reader)
         {
