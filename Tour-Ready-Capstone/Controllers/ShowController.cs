@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tour_Ready_Capstone.Interfaces;
+using Tour_Ready_Capstone.Models;
+using Tour_Ready_Capstone.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +11,22 @@ namespace Tour_Ready_Capstone.Controllers
     [ApiController]
     public class ShowController : ControllerBase
     {
-        // GET: api/<ShowController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IShow _showRepo;
+
+        public ShowController(
+        IShow showRepository)
+
         {
-            return new string[] { "value1", "value2" };
+            _showRepo = showRepository;
+
+        }
+
+        // GET: api/<ShowController>
+        [HttpGet("GetShowByUserId/{id}")]
+        public ActionResult GetAllShowsByUserId(int id)
+        {
+            var shows = _showRepo.GetAllShowsByUserId(id);
+            return Ok(shows);
         }
 
         // GET api/<ShowController>/5

@@ -6,11 +6,6 @@ namespace Tour_Ready_Capstone.Repositories
 {
     public class GroupMemberRepository : BaseRepository, IGroupMember
     {
-        private readonly string _baseSqlSelect = @"SELECT Id,
-                                                    UserId,
-                                                    GroupId,
-                                                    IsEditor
-                                                   FROM [GroupMember]";
         public GroupMemberRepository(IConfiguration config) : base(config) { }
 
         public List<GroupMemberByGroupId> GetMemberByUserId(int id)
