@@ -13,8 +13,7 @@ namespace Tour_Ready_Capstone.Controllers
     {
         private readonly IGroup _groupRepo;
 
-        public GroupController(
-        IGroup groupRepository)
+        public GroupController(IGroup groupRepository)
 
         {
             _groupRepo = groupRepository;

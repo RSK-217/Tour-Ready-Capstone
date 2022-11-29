@@ -11,43 +11,50 @@ namespace Tour_Ready_Capstone.Controllers
     [ApiController]
     public class GroupMemberController : ControllerBase
     {
-        public GroupMemberController(
-    IGroupMember groupMemberRepository)
+        private readonly IGroupMember _groupMemberRepo;
+        public GroupMemberController(IGroupMember groupMemberRepository)
 
         {
             _groupMemberRepo = groupMemberRepository;
 
         }
-        // GET: api/<GroupMemberController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        
+        // GET api/<GroupMemberController>/5
+        [HttpGet("GetMemberByUserId/{id}")]
+        public ActionResult GetMemberByUserId(int id)
         {
-            return new string[] { "value1", "value2" };
+            var member = _groupMemberRepo.GetMemberByUserId(id);
+            return Ok(member);
         }
 
         // GET api/<GroupMemberController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllMembersByGroupId/{id}")]
+        public ActionResult GetAllMembersByGroupId(int id)
         {
-            return "value";
+            var members = _groupMemberRepo.GetAllMembersByGroupId(id);
+            return Ok(members);
         }
 
         // POST api/<GroupMemberController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateGroupMember(GroupMember groupMember)
         {
+            var newMember = _groupMemberRepo.CreateGroupMember(groupMember);
+            return Ok(newMember);
         }
 
         // PUT api/<GroupMemberController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateGroupMember(GroupMember groupMember)
         {
+            _groupMemberRepo.UpdateGroupMember(groupMember);
         }
 
         // DELETE api/<GroupMemberController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteMember(int id)
         {
+            _groupMemberRepo.DeleteMember(id);
         }
     }
 }
