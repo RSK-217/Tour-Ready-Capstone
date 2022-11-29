@@ -40,6 +40,91 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
+
+        public User GetUserById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $"{_baseSqlSelect} WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        User? result = null;
+                        if (reader.Read())
+                        {
+                            return LoadFromData(reader);
+                        }
+
+                        return result;
+
+                    }
+                }
+            }
+        }
+
+        public User CreateUser(User user)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO [User] (FirebaseId, Name, Title, Email, Phone, Image)
+                    OUTPUT INSERTED.ID
+                    VALUES (@firebaseId, @Name, @title, @email, @phone, @image);
+                ";
+                    cmd.Parameters.AddWithValue("@firebaseId", user.FirebaseId);
+                    cmd.Parameters.AddWithValue("@name", user.Name);
+                    cmd.Parameters.AddWithValue("@title", user.Title);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
+                    cmd.Parameters.AddWithValue("@phone", user.Phone);
+                    cmd.Parameters.AddWithValue("@image", user.Image);
+                    
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    user.Id = id;
+                    return user;
+                }
+            }
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE [User]
+                            SET
+                                Name = @name,
+                                Title = @title,
+                                Email = @email,
+                                Phone = @phone,
+                                Image = @image
+                            WHERE Id = @id";
+                    
+                    cmd.Parameters.AddWithValue("@id", user.Id);
+                    cmd.Parameters.AddWithValue("@name", user.Name);
+                    cmd.Parameters.AddWithValue("@title", user.Title);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
+                    cmd.Parameters.AddWithValue("@phone", user.Phone);
+                    cmd.Parameters.AddWithValue("@image", user.Image);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
         private User LoadFromData(SqlDataReader reader)
         {
             return new User

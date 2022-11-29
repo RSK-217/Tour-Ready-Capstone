@@ -30,27 +30,28 @@ namespace Tour_Ready_Capstone.Controllers
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult GetUserById(int id)
         {
-            return "value";
+            var user = _userRepo.GetUserById(id);
+            return Ok(user);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateUser(User user)
         {
+            var newUser = _userRepo.CreateUser(user);
+            return Ok(newUser);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateUser(User user)
         {
+            _userRepo.UpdateUser(user);
+        
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }
