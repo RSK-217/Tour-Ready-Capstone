@@ -53,7 +53,7 @@ namespace Tour_Ready_Capstone.Repositories
                         ShowWithGroupName? result = null;
                         if (reader.Read())
                         {
-                            return LoadFromDataTwo(reader);
+                            return LoadFromData(reader);
                         }
 
                         return result;
@@ -94,7 +94,7 @@ namespace Tour_Ready_Capstone.Repositories
                         var results = new List<ShowWithGroupName>();
                         while (reader.Read())
                         {
-                            var group = LoadFromDataTwo(reader);
+                            var group = LoadFromData(reader);
 
                             results.Add(group);
                         }
@@ -138,7 +138,7 @@ namespace Tour_Ready_Capstone.Repositories
                         var results = new List<ShowWithGroupName>();
                         while (reader.Read())
                         {
-                            var group = LoadFromDataTwo(reader);
+                            var group = LoadFromData(reader);
 
                             results.Add(group);
                         }
@@ -240,25 +240,7 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
-
         private ShowWithGroupName LoadFromData(SqlDataReader reader)
-        {
-            return new ShowWithGroupName
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                GroupId = reader.GetInt32(reader.GetOrdinal("GroupId")),
-                Venue = reader.GetString(reader.GetOrdinal("Venue")),
-                ShowDate = reader.GetDateTime(reader.GetOrdinal("ShowDate")),
-                CityId = reader.GetInt32(reader.GetOrdinal("CityId")),
-                SetList = reader.GetString(reader.GetOrdinal("SetList")),
-                ShowNotes = reader.GetString(reader.GetOrdinal("ShowNotes")),
-                MerchSales = reader.GetInt32(reader.GetOrdinal("MerchSales")),
-                Payout = reader.GetInt32(reader.GetOrdinal("Payout")),
-                IsFavorite = reader.GetBoolean(reader.GetOrdinal("IsFavorite")),
-            };
-        }
-        private ShowWithGroupName LoadFromDataTwo(SqlDataReader reader)
         {
             return new ShowWithGroupName
             {
