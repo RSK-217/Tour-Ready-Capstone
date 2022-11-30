@@ -21,7 +21,14 @@ namespace Tour_Ready_Capstone.Controllers
 
         }
 
-        // GET: api/<ShowController>
+        // GET api/<ShowController>/5
+        [HttpGet("GetShowById/{id}")]
+        public ActionResult GetShowById(int id)
+        {
+            var show = _showRepo.GetShowById(id);
+            return Ok(show);
+        }
+        // GET: api/<ShowController>/5
         [HttpGet("GetShowByUserId/{id}")]
         public ActionResult GetAllShowsByUserId(int id)
         {

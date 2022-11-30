@@ -21,6 +21,47 @@ namespace Tour_Ready_Capstone.Repositories
                                                     
         public ShowRepository(IConfiguration config) : base(config) { }
 
+        public ShowWithGroupName GetShowById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $@"SELECT s.id, 
+                                                          s.userId, 
+                                                          groupId, 
+                                                          g.groupName,  
+                                                          venue, 
+                                                          showDate, 
+                                                          cityId,
+                                                          c.city,
+                                                          setList, 
+                                                          showNotes, 
+                                                          merchSales, 
+                                                          payout, 
+                                                          isFavorite
+                                                    FROM (([Show] s
+                                                    JOIN [Group] g ON s.groupId = g.id)
+                                                    JOIN [City] c ON s.cityId = c.id)
+                                        WHERE s.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ShowWithGroupName? result = null;
+                        if (reader.Read())
+                        {
+                            return LoadFromDataTwo(reader);
+                        }
+
+                        return result;
+
+                    }
+                }
+            }
+        }
         public List<ShowWithGroupName> GetAllShowsByUserId(int id)
         {
             using (SqlConnection conn = Connection)
