@@ -30,10 +30,11 @@ namespace Tour_Ready_Capstone.Controllers
         }
 
         // GET api/<CityController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllCitiesByUserId/{id}")]
+        public ActionResult GetAllCitiesByUserId(int id)
         {
-            return "value";
+            var cities = _cityRepo.GetAllCitiesByUserId(id);
+            return Ok(cities);
         }
 
         // POST api/<CityController>

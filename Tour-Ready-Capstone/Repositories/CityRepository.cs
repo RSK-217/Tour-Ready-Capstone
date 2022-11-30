@@ -41,6 +41,34 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
+        public List<City> GetAllCitiesByUserId(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $"{_baseSqlSelect} WHERE UserId = @userId";
+
+                    cmd.Parameters.AddWithValue("@userId", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var results = new List<City>();
+                        while (reader.Read())
+                        {
+                            var city = LoadFromData(reader);
+
+                            results.Add(city);
+                        }
+
+                        return results;
+
+                    }
+                }
+            }
+        }
+
         private City LoadFromData(SqlDataReader reader)
         {
             return new City
