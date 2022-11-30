@@ -39,8 +39,10 @@ namespace Tour_Ready_Capstone.Controllers
 
         // POST api/<CityController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateCity(City city)
         {
+            var newCity = _cityRepo.CreateCity(city);
+            return Ok(newCity);
         }
 
         // PUT api/<CityController>/5
