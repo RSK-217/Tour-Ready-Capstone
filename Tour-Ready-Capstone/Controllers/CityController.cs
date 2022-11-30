@@ -47,8 +47,9 @@ namespace Tour_Ready_Capstone.Controllers
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateCity(City city)
         {
+            _cityRepo.UpdateCity(city);
         }
 
         // DELETE api/<CityController>/5

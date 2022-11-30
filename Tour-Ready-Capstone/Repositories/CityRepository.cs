@@ -94,6 +94,35 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
+
+        public void UpdateCity(City city)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE [City]
+                            SET
+                                UserId = @userId,
+                                CityName = @cityName,
+                                State = @state,
+                                Country = @country,
+                                CityNotes = @cityNotes
+                            WHERE Id = @id";
+                    
+                    cmd.Parameters.AddWithValue("@id", city.Id);
+                    cmd.Parameters.AddWithValue("@userId", city.UserId);
+                    cmd.Parameters.AddWithValue("@cityName", city.CityName);
+                    cmd.Parameters.AddWithValue("@state", city.State);
+                    cmd.Parameters.AddWithValue("@country", city.Country);
+                    cmd.Parameters.AddWithValue("@cityNotes", city.CityNotes);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         private City LoadFromData(SqlDataReader reader)
         {
             return new City
