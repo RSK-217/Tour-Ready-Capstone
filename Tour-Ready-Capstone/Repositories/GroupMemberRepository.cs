@@ -8,7 +8,7 @@ namespace Tour_Ready_Capstone.Repositories
     {
         public GroupMemberRepository(IConfiguration config) : base(config) { }
 
-        public List<GroupMemberByGroupId> GetMemberByUserId(int id)
+        public List<MemebersOfGroupViewModel> GetMemberByUserId(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -25,7 +25,7 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var results = new List<GroupMemberByGroupId>();
+                        var results = new List<MemebersOfGroupViewModel>();
                         while (reader.Read())
                         {
                             var group = LoadFromData(reader);
@@ -40,7 +40,7 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
-        public List<GroupMemberByGroupId> GetAllMembersByGroupId(int id)
+        public List<MemebersOfGroupViewModel> GetAllMembersByGroupId(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -58,10 +58,10 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        List<GroupMemberByGroupId>? groupMembers = new List<GroupMemberByGroupId>();
+                        List<MemebersOfGroupViewModel>? groupMembers = new List<MemebersOfGroupViewModel>();
                         while (reader.Read())
                         {
-                            GroupMemberByGroupId groupMember = LoadFromData(reader);
+                            MemebersOfGroupViewModel groupMember = LoadFromData(reader);
 
                             groupMembers.Add(groupMember);  
                         }
@@ -145,9 +145,9 @@ namespace Tour_Ready_Capstone.Repositories
         }
 
 
-        private GroupMemberByGroupId LoadFromData(SqlDataReader reader)
+        private MemebersOfGroupViewModel LoadFromData(SqlDataReader reader)
         {
-            return new GroupMemberByGroupId
+            return new MemebersOfGroupViewModel
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),

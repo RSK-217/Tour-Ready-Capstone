@@ -12,7 +12,7 @@ namespace Tour_Ready_Capstone.Repositories
                                                    FROM [Group]";
         public GroupRepository(IConfiguration config) : base(config) { }
 
-        public List<GroupsByUserId> GetAllGroupsByUserId(int id)
+        public List<GroupsByUserViewModel> GetAllGroupsByUserId(int id)
         {
             using (var conn = Connection)
             {
@@ -28,7 +28,7 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var results = new List<GroupsByUserId>();
+                        var results = new List<GroupsByUserViewModel>();
                         while (reader.Read())
                         {
                             var group = LoadFromDataTwo(reader);
@@ -146,9 +146,9 @@ namespace Tour_Ready_Capstone.Repositories
             };
         }
 
-        private GroupsByUserId LoadFromDataTwo(SqlDataReader reader)
+        private GroupsByUserViewModel LoadFromDataTwo(SqlDataReader reader)
         {
-            return new GroupsByUserId
+            return new GroupsByUserViewModel
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
