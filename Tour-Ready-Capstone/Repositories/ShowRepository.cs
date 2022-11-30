@@ -221,6 +221,26 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
+        public void DeleteShow(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM [Show]
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         private ShowWithGroupName LoadFromData(SqlDataReader reader)
         {
             return new ShowWithGroupName

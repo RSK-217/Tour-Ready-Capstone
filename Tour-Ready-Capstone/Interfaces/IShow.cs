@@ -13,5 +13,7 @@ namespace Tour_Ready_Capstone.Interfaces
         public Show CreateShow(Show show);
 
         public void UpdateShow(Show show);
+
+        public void DeleteShow(int id);
     }
 }

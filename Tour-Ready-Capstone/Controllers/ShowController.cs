@@ -61,8 +61,9 @@ namespace Tour_Ready_Capstone.Controllers
 
         // DELETE api/<ShowController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteShow(int id)
         {
+            _showRepo.DeleteShow(id);
         }
     }
 }
