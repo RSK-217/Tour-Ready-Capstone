@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tour_Ready_Capstone.Models;
+using Tour_Ready_Capstone.Repositories;
+using Tour_Ready_Capstone.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,36 +21,42 @@ namespace Tour_Ready_Capstone.Controllers
 
         }
 
-        // GET: api/<CityController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET api/<CityController>/5
+        [HttpGet("GetCityById/{id}")]
+        public ActionResult GetCityById(int id)
         {
-            return new string[] { "value1", "value2" };
+            var city = _cityRepo.GetCityById(id);
+            return Ok(city);
         }
 
         // GET api/<CityController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllCitiesByUserId/{id}")]
+        public ActionResult GetAllCitiesByUserId(int id)
         {
-            return "value";
+            var cities = _cityRepo.GetAllCitiesByUserId(id);
+            return Ok(cities);
         }
 
         // POST api/<CityController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateCity(City city)
         {
+            var newCity = _cityRepo.CreateCity(city);
+            return Ok(newCity);
         }
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateCity(City city)
         {
+            _cityRepo.UpdateCity(city);
         }
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteCity(int id)
         {
+            _cityRepo.DeleteCity(id);
         }
     }
 }

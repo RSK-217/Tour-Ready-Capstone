@@ -94,9 +94,9 @@ namespace Tour_Ready_Capstone.Repositories
                         var results = new List<ShowWithGroupName>();
                         while (reader.Read())
                         {
-                            var group = LoadFromData(reader);
+                            var show = LoadFromData(reader);
 
-                            results.Add(group);
+                            results.Add(show);
                         }
 
                         return results;
@@ -138,9 +138,9 @@ namespace Tour_Ready_Capstone.Repositories
                         var results = new List<ShowWithGroupName>();
                         while (reader.Read())
                         {
-                            var group = LoadFromData(reader);
+                            var show = LoadFromData(reader);
 
-                            results.Add(group);
+                            results.Add(show);
                         }
 
                         return results;
