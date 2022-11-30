@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tour_Ready_Capstone.Models;
+using Tour_Ready_Capstone.Repositories;
+using Tour_Ready_Capstone.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,11 +21,12 @@ namespace Tour_Ready_Capstone.Controllers
 
         }
 
-        // GET: api/<CityController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET api/<CityController>/5
+        [HttpGet("GetCityById/{id}")]
+        public ActionResult GetCityById(int id)
         {
-            return new string[] { "value1", "value2" };
+            var city = _cityRepo.GetCityById(id);
+            return Ok(city);
         }
 
         // GET api/<CityController>/5

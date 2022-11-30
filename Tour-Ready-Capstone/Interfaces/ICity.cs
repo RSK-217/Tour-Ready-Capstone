@@ -6,5 +6,6 @@ namespace Tour_Ready_Capstone.Interfaces
 {
     public interface ICity
     {
+        public City GetCityById(int id);
     }
 }
