@@ -1,6 +1,6 @@
 ﻿namespace Tour_Ready_Capstone.Models
 {
-    public class GroupsByUserId
+    public class GroupsByUserViewModel
     {
         public int Id { get; set; }
         public int UserId { get; set; }
