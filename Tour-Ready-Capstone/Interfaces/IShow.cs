@@ -6,5 +6,7 @@ namespace Tour_Ready_Capstone.Interfaces
     public interface IShow
     {
         public List<ShowWithGroupName> GetAllShowsByUserId(int id);
+
+        public List<ShowWithGroupName> GetAllShowsByGroupId(int id);
     }
 }

@@ -30,10 +30,11 @@ namespace Tour_Ready_Capstone.Controllers
         }
 
         // GET api/<ShowController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllShowsByGroupId/{id}")]
+        public ActionResult GetAllShowsByGroupId(int id)
         {
-            return "value";
+            var shows = _showRepo.GetAllShowsByGroupId(id);
+            return Ok(shows);
         }
 
         // POST api/<ShowController>
