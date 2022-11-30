@@ -21,15 +21,15 @@ namespace Tour_Ready_Capstone.Controllers
         }
 
         // GET: api/<GroupController>
-        [HttpGet]
-        public ActionResult GetAllGroups()
+        [HttpGet("GetAllGroupsByUserId/{id}")]
+        public ActionResult GetAllGroupsByUserId(int id)
         {
-            var groups = _groupRepo.GetAllGroups();
+            var groups = _groupRepo.GetAllGroupsByUserId(id);
             return Ok(groups);
         }
 
         // GET api/<GroupController>/5
-        [HttpGet("{id}")]
+        [HttpGet("GetGroupById/{id}")]
         public ActionResult GetGroupById(int id)
         {
             var group = _groupRepo.GetGroupById(id);

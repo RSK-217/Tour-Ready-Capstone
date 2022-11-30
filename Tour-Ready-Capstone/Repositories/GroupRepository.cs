@@ -12,21 +12,26 @@ namespace Tour_Ready_Capstone.Repositories
                                                    FROM [Group]";
         public GroupRepository(IConfiguration config) : base(config) { }
 
-        public List<Group> GetAllGroups()
+        public List<GroupsByUserId> GetAllGroupsByUserId(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = _baseSqlSelect;
+                    cmd.CommandText = $@"SELECT gm.id, userId, groupId, isEditor, g.groupName 
+                        FROM [GroupMember] gm 
+                        JOIN [Group] g ON gm.groupId = g.id  
+                        WHERE UserId = @userId";
+
+                    cmd.Parameters.AddWithValue("@userId", id);
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var results = new List<Group>();
+                        var results = new List<GroupsByUserId>();
                         while (reader.Read())
                         {
-                            var group = LoadFromData(reader);
+                            var group = LoadFromDataTwo(reader);
 
                             results.Add(group);
                         }
@@ -138,6 +143,19 @@ namespace Tour_Ready_Capstone.Repositories
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 GroupName = reader.GetString(reader.GetOrdinal("GroupName")),
                 Image = reader.GetString(reader.GetOrdinal("Image"))
+            };
+        }
+
+        private GroupsByUserId LoadFromDataTwo(SqlDataReader reader)
+        {
+            return new GroupsByUserId
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                GroupId = reader.GetInt32(reader.GetOrdinal("GroupId")),
+                IsEditor = reader.GetBoolean(reader.GetOrdinal("IsEditor")),
+                GroupName = reader.GetString(reader.GetOrdinal("GroupName")),
+                
             };
         }
     }

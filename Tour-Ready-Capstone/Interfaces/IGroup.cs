@@ -5,7 +5,7 @@ namespace Tour_Ready_Capstone.Interfaces
 {
     public interface IGroup
     {
-        public List<Group> GetAllGroups();
+        public List<GroupsByUserId> GetAllGroupsByUserId(int id);
         public Group GetGroupById(int id);
         public Group CreateGroup(Group group);
         public void UpdateGroup(Group group);
