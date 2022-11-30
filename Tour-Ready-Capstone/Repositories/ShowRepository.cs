@@ -181,6 +181,46 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
+        public void UpdateShow(Show show)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE [Show]
+                            SET
+                                UserId = @userId,
+                                GroupId = @groupId,
+                                Venue = @venue,
+                                ShowDate = @showDate,
+                                CityId = @cityId,
+                                SetList = @setList,
+                                ShowNotes = @showNotes,
+                                MerchSales = @merchSales,
+                                Payout = @payout,
+                                IsFavorite = @isFavorite
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", show.Id);
+                    cmd.Parameters.AddWithValue("@userId", show.UserId);
+                    cmd.Parameters.AddWithValue("@groupId", show.GroupId);
+                    cmd.Parameters.AddWithValue("@venue", show.Venue);
+                    cmd.Parameters.AddWithValue("@showDate", show.ShowDate);
+                    cmd.Parameters.AddWithValue("@CityId", show.CityId);
+                    cmd.Parameters.AddWithValue("@SetList", show.SetList);
+                    cmd.Parameters.AddWithValue("@ShowNotes", show.ShowNotes);
+                    cmd.Parameters.AddWithValue("@MerchSales", show.MerchSales);
+                    cmd.Parameters.AddWithValue("@Payout", show.Payout);
+                    cmd.Parameters.AddWithValue("@IsFavorite", show.IsFavorite);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         private ShowWithGroupName LoadFromData(SqlDataReader reader)
         {
             return new ShowWithGroupName

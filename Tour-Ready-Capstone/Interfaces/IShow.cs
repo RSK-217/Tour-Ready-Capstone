@@ -11,5 +11,7 @@ namespace Tour_Ready_Capstone.Interfaces
         public List<ShowWithGroupName> GetAllShowsByGroupId(int id);
 
         public Show CreateShow(Show show);
+
+        public void UpdateShow(Show show);
     }
 }

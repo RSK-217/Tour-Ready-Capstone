@@ -54,8 +54,9 @@ namespace Tour_Ready_Capstone.Controllers
 
         // PUT api/<ShowController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateShow(Show show)
         {
+            _showRepo.UpdateShow(show);
         }
 
         // DELETE api/<ShowController>/5
