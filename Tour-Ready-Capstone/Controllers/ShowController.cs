@@ -46,8 +46,10 @@ namespace Tour_Ready_Capstone.Controllers
 
         // POST api/<ShowController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateShow(Show show)
         {
+            var newShow = _showRepo.CreateShow(show);
+            return Ok(newShow);
         }
 
         // PUT api/<ShowController>/5

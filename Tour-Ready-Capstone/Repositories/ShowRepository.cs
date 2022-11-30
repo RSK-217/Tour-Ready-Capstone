@@ -150,6 +150,37 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
+        public Show CreateShow(Show show)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO [Show] (UserId, GroupId, Venue, ShowDate, CityId, SetList, ShowNotes, MerchSales, Payout, IsFavorite)
+                    OUTPUT INSERTED.ID
+                    VALUES (@userId, @groupId, @venue, @showDate, @cityId, @setList, @showNotes, @merchSales, @payout, @isFavorite)";
+                    
+                    cmd.Parameters.AddWithValue("@userId", show.UserId);
+                    cmd.Parameters.AddWithValue("@groupId", show.GroupId);
+                    cmd.Parameters.AddWithValue("@venue", show.Venue);
+                    cmd.Parameters.AddWithValue("@showDate", show.ShowDate);
+                    cmd.Parameters.AddWithValue("@CityId", show.CityId);
+                    cmd.Parameters.AddWithValue("@SetList", show.SetList);
+                    cmd.Parameters.AddWithValue("@ShowNotes", show.ShowNotes);
+                    cmd.Parameters.AddWithValue("@MerchSales", show.MerchSales);
+                    cmd.Parameters.AddWithValue("@Payout", show.Payout);
+                    cmd.Parameters.AddWithValue("@IsFavorite", show.IsFavorite);
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    show.Id = id;
+                    return show;
+                }
+            }
+        }
+
         private ShowWithGroupName LoadFromData(SqlDataReader reader)
         {
             return new ShowWithGroupName

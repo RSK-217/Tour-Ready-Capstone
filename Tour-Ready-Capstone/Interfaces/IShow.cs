@@ -9,5 +9,7 @@ namespace Tour_Ready_Capstone.Interfaces
         public List<ShowWithGroupName> GetAllShowsByUserId(int id);
 
         public List<ShowWithGroupName> GetAllShowsByGroupId(int id);
+
+        public Show CreateShow(Show show);
     }
 }
