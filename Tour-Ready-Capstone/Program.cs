@@ -1,5 +1,6 @@
 using Tour_Ready_Capstone.Interfaces;
 using Tour_Ready_Capstone.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
