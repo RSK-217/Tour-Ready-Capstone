@@ -54,8 +54,9 @@ namespace Tour_Ready_Capstone.Controllers
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteCity(int id)
         {
+            _cityRepo.DeleteCity(id);
         }
     }
 }

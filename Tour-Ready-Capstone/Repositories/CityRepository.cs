@@ -123,6 +123,26 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
+
+        public void DeleteCity(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM [City]
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         private City LoadFromData(SqlDataReader reader)
         {
             return new City

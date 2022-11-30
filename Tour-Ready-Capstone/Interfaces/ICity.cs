@@ -10,6 +10,7 @@ namespace Tour_Ready_Capstone.Interfaces
         public List<City> GetAllCitiesByUserId(int id);
         public City CreateCity(City city);
         public void UpdateCity(City city);
+        public void DeleteCity(int id);
 
 
     }
