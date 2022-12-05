@@ -30,14 +30,6 @@ namespace Tour_Ready_Capstone.Repositories
                         List<User> users = new List<User>();
                         while (reader.Read())
                         {
-                            //User user = new User()
-                            //{
-                            //    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            //    FirebaseId = reader.GetString(reader.GetOrdinal("FirebaseId")),
-                            //    Name = reader.GetString(reader.GetOrdinal("Name")),
-                            //    Email = reader.GetString(reader.GetOrdinal("Email")),
-                            //    Image = reader.GetString(reader.GetOrdinal("Image"))
-                            //};
                             var user = LoadFromData(reader);
 
                             users.Add(user);
