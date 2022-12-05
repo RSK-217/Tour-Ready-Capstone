@@ -35,8 +35,17 @@ namespace Tour_Ready_Capstone.Controllers
             return Ok(user);
         }
 
+        // GET api/<UserController>/5
+        [HttpGet("CheckIfUserExists/{firebaseId}")]
+
+        public bool CheckIfUserExists(string firebaseId)
+        {
+            bool result = _userRepo.CheckIfUserExists(firebaseId);
+            return result;
+        }
+
         // POST api/<UserController>
-        [HttpPost]
+        [HttpPost("RegisterUser")]
         public ActionResult CreateUser(User user)
         {
             var newUser = _userRepo.CreateUser(user);

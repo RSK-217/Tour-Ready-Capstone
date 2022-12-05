@@ -9,13 +9,45 @@ namespace Tour_Ready_Capstone.Repositories
         private readonly string _baseSqlSelect = @"SELECT Id,
                                                     FirebaseId,
                                                     Name,
-                                                    Title,
                                                     Email,
-                                                    Phone,
                                                     Image
                                                    FROM [User]";
         public UserRepository(IConfiguration config) : base(config) { }
 
+        public bool CheckIfUserExists(string firebaseId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $"{_baseSqlSelect} WHERE FirebaseID = @firebaseId";
+
+                    cmd.Parameters.AddWithValue("@firebaseId", firebaseId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<User> users = new List<User>();
+                        while (reader.Read())
+                        {
+                            //User user = new User()
+                            //{
+                            //    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            //    FirebaseId = reader.GetString(reader.GetOrdinal("FirebaseId")),
+                            //    Name = reader.GetString(reader.GetOrdinal("Name")),
+                            //    Email = reader.GetString(reader.GetOrdinal("Email")),
+                            //    Image = reader.GetString(reader.GetOrdinal("Image"))
+                            //};
+                            var user = LoadFromData(reader);
+
+                            users.Add(user);
+                        };
+                        return users.Count > 0;
+                    }
+                    
+                }
+            }
+        }
         public List<User> GetAllUsers()
         {
             using (var conn = Connection)
@@ -75,15 +107,13 @@ namespace Tour_Ready_Capstone.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [User] (FirebaseId, Name, Title, Email, Phone, Image)
+                    INSERT INTO [User] (FirebaseId, Name, Email, Image)
                     OUTPUT INSERTED.ID
-                    VALUES (@firebaseId, @Name, @title, @email, @phone, @image);
+                    VALUES (@firebaseId, @Name, @email, @image);
                 ";
                     cmd.Parameters.AddWithValue("@firebaseId", user.FirebaseId);
                     cmd.Parameters.AddWithValue("@name", user.Name);
-                    cmd.Parameters.AddWithValue("@title", user.Title);
                     cmd.Parameters.AddWithValue("@email", user.Email);
-                    cmd.Parameters.AddWithValue("@phone", user.Phone);
                     cmd.Parameters.AddWithValue("@image", user.Image);
                     
 
@@ -107,17 +137,13 @@ namespace Tour_Ready_Capstone.Repositories
                             UPDATE [User]
                             SET
                                 Name = @name,
-                                Title = @title,
                                 Email = @email,
-                                Phone = @phone,
                                 Image = @image
                             WHERE Id = @id";
                     
                     cmd.Parameters.AddWithValue("@id", user.Id);
                     cmd.Parameters.AddWithValue("@name", user.Name);
-                    cmd.Parameters.AddWithValue("@title", user.Title);
                     cmd.Parameters.AddWithValue("@email", user.Email);
-                    cmd.Parameters.AddWithValue("@phone", user.Phone);
                     cmd.Parameters.AddWithValue("@image", user.Image);
 
                     cmd.ExecuteNonQuery();
@@ -131,9 +157,7 @@ namespace Tour_Ready_Capstone.Repositories
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 FirebaseId = reader.GetString(reader.GetOrdinal("FirebaseId")),
                 Name = reader.GetString(reader.GetOrdinal("Name")),
-                Title = reader.GetString(reader.GetOrdinal("Title")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
-                Phone = reader.GetString(reader.GetOrdinal("Phone")),
                 Image = reader.GetString(reader.GetOrdinal("Image"))
             };
         }
