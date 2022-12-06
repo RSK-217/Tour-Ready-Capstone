@@ -5,10 +5,10 @@ namespace Tour_Ready_Capstone.Interfaces
 {
     public interface IShow
     {
-        public ShowsByGroupViewModel GetShowById(int id);
-        public List<ShowsByGroupViewModel> GetAllShowsByUserId(int id);
+        public ShowsByIdViewModel GetShowById(int id);
+        public List<ShowsByIdViewModel> GetAllShowsByUserId(int id);
 
-        public List<ShowsByGroupViewModel> GetAllShowsByGroupId(int id);
+        public List<ShowsByIdViewModel> GetAllShowsByGroupId(int id);
 
         public Show CreateShow(Show show);
 

@@ -21,7 +21,7 @@ namespace Tour_Ready_Capstone.Repositories
                                                     
         public ShowRepository(IConfiguration config) : base(config) { }
 
-        public ShowsByGroupViewModel GetShowById(int id)
+        public ShowsByIdViewModel GetShowById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -36,6 +36,8 @@ namespace Tour_Ready_Capstone.Repositories
                                                           showDate, 
                                                           cityId,
                                                           c.cityName,
+                                                          c.state,
+                                                          c.country,
                                                           setList, 
                                                           showNotes, 
                                                           merchSales, 
@@ -50,7 +52,7 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        ShowsByGroupViewModel? result = null;
+                        ShowsByIdViewModel? result = null;
                         if (reader.Read())
                         {
                             return LoadFromData(reader);
@@ -62,7 +64,7 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
-        public List<ShowsByGroupViewModel> GetAllShowsByUserId(int id)
+        public List<ShowsByIdViewModel> GetAllShowsByUserId(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -93,7 +95,7 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var results = new List<ShowsByGroupViewModel>();
+                        var results = new List<ShowsByIdViewModel>();
                         while (reader.Read())
                         {
                             var show = LoadFromData(reader);
@@ -108,7 +110,7 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
-        public List<ShowsByGroupViewModel> GetAllShowsByGroupId(int id)
+        public List<ShowsByIdViewModel> GetAllShowsByGroupId(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -139,7 +141,7 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var results = new List<ShowsByGroupViewModel>();
+                        var results = new List<ShowsByIdViewModel>();
                         while (reader.Read())
                         {
                             var show = LoadFromData(reader);
@@ -244,9 +246,9 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
-        private ShowsByGroupViewModel LoadFromData(SqlDataReader reader)
+        private ShowsByIdViewModel LoadFromData(SqlDataReader reader)
         {
-            return new ShowsByGroupViewModel
+            return new ShowsByIdViewModel
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
