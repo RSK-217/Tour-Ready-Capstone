@@ -91,6 +91,32 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
+        public User GetUserByFirebaseId(string firebaseId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $"{_baseSqlSelect} WHERE FirebaseId = @firebaseId";
+
+                    cmd.Parameters.AddWithValue("@firebaseId", firebaseId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        User? result = null;
+                        if (reader.Read())
+                        {
+                            return LoadFromData(reader);
+                        }
+
+                        return result;
+
+                    }
+                }
+            }
+        }
+
         public User CreateUser(User user)
         {
             using (SqlConnection conn = Connection)

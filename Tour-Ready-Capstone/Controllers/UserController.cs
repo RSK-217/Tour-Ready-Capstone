@@ -36,6 +36,14 @@ namespace Tour_Ready_Capstone.Controllers
         }
 
         // GET api/<UserController>/5
+        [HttpGet("GetUserByFirebaseId/{firebaseId}")]
+        public ActionResult GetUserByFirebaseId(string firebaseId)
+        {
+            var user = _userRepo.GetUserByFirebaseId(firebaseId);
+            return Ok(user);
+        }
+
+        // GET api/<UserController>/5
         [HttpGet("CheckIfUserExists/{firebaseId}")]
 
         public bool CheckIfUserExists(string firebaseId)

@@ -10,5 +10,7 @@ namespace Tour_Ready_Capstone.Interfaces
         public User CreateUser(User user);
         public void UpdateUser(User user);
         public bool CheckIfUserExists(string firebaseId);
+
+        public User GetUserByFirebaseId(string firebaseId);
     }
 }
