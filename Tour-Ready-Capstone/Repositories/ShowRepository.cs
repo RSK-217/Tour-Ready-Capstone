@@ -8,10 +8,13 @@ namespace Tour_Ready_Capstone.Repositories
     {
         private readonly string _baseSqlSelect = @"SELECT id, 
                                                           userId, 
-                                                          groupId,   
+                                                          groupId,
+                                                          groupName,
                                                           venue, 
                                                           showDate, 
-                                                          cityId,
+                                                          cityName,
+                                                          state,
+                                                          country,
                                                           setList, 
                                                           showNotes, 
                                                           merchSales, 
@@ -34,18 +37,16 @@ namespace Tour_Ready_Capstone.Repositories
                                                           g.groupName,  
                                                           venue, 
                                                           showDate, 
-                                                          cityId,
-                                                          c.cityName,
-                                                          c.state,
-                                                          c.country,
+                                                          cityName,
+                                                          state,
+                                                          country,
                                                           setList, 
                                                           showNotes, 
                                                           merchSales, 
                                                           payout, 
                                                           isFavorite
-                                                    FROM (([Show] s
+                                                    FROM ([Show] s
                                                     JOIN [Group] g ON s.groupId = g.id)
-                                                    JOIN [City] c ON s.cityId = c.id)
                                         WHERE s.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -77,18 +78,16 @@ namespace Tour_Ready_Capstone.Repositories
                                                           g.groupName,  
                                                           venue, 
                                                           showDate, 
-                                                          cityId,
-                                                          c.cityName,
-                                                          c.state,
-                                                          c.country,
+                                                          cityName,
+                                                          state,
+                                                          country,
                                                           setList, 
                                                           showNotes, 
                                                           merchSales, 
                                                           payout, 
                                                           isFavorite
-                                                    FROM (([Show] s
+                                                    FROM ([Show] s
                                                     JOIN [Group] g ON s.groupId = g.id)
-                                                    JOIN [City] c ON s.cityId = c.id)
                                         WHERE s.UserId = @userId";
 
                     cmd.Parameters.AddWithValue("@userId", id);
@@ -123,18 +122,17 @@ namespace Tour_Ready_Capstone.Repositories
                                                           g.groupName,  
                                                           venue, 
                                                           showDate, 
-                                                          cityId,
-                                                          c.cityName,
-                                                          c.state,
-                                                          c.country,
+                                                          cityName,
+                                                          state,
+                                                          country,
                                                           setList, 
                                                           showNotes, 
                                                           merchSales, 
                                                           payout, 
                                                           isFavorite
-                                                    FROM (([Show] s
+                                                    FROM ([Show] s
                                                     JOIN [Group] g ON s.groupId = g.id)
-                                                    JOIN [City] c ON s.cityId = c.id)
+                                                    
                                         WHERE GroupId = @groupId";
 
                     cmd.Parameters.AddWithValue("@groupId", id);
@@ -164,20 +162,23 @@ namespace Tour_Ready_Capstone.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [Show] (UserId, GroupId, Venue, ShowDate, CityId, SetList, ShowNotes, MerchSales, Payout, IsFavorite)
+                    INSERT INTO [Show] (UserId, GroupId, GroupName, Venue, ShowDate, CityName, State, Country, SetList, ShowNotes, MerchSales, Payout, IsFavorite)
                     OUTPUT INSERTED.ID
-                    VALUES (@userId, @groupId, @venue, @showDate, @cityId, @setList, @showNotes, @merchSales, @payout, @isFavorite)";
+                    VALUES (@userId, @groupId, @groupName, @venue, @showDate, @cityName, @state, @country, @setList, @showNotes, @merchSales, @payout, @isFavorite)";
                     
                     cmd.Parameters.AddWithValue("@userId", show.UserId);
                     cmd.Parameters.AddWithValue("@groupId", show.GroupId);
+                    cmd.Parameters.AddWithValue("@groupName", show.GroupName);
                     cmd.Parameters.AddWithValue("@venue", show.Venue);
                     cmd.Parameters.AddWithValue("@showDate", show.ShowDate);
-                    cmd.Parameters.AddWithValue("@CityId", show.CityId);
-                    cmd.Parameters.AddWithValue("@SetList", show.SetList);
-                    cmd.Parameters.AddWithValue("@ShowNotes", show.ShowNotes);
-                    cmd.Parameters.AddWithValue("@MerchSales", show.MerchSales);
-                    cmd.Parameters.AddWithValue("@Payout", show.Payout);
-                    cmd.Parameters.AddWithValue("@IsFavorite", show.IsFavorite);
+                    cmd.Parameters.AddWithValue("@cityName", show.CityName);
+                    cmd.Parameters.AddWithValue("@state", show.State);
+                    cmd.Parameters.AddWithValue("@country", show.Country);
+                    cmd.Parameters.AddWithValue("@setList", show.SetList);
+                    cmd.Parameters.AddWithValue("@showNotes", show.ShowNotes);
+                    cmd.Parameters.AddWithValue("@merchSales", show.MerchSales);
+                    cmd.Parameters.AddWithValue("@payout", show.Payout);
+                    cmd.Parameters.AddWithValue("@isFavorite", show.IsFavorite);
 
                     int id = (int)cmd.ExecuteScalar();
 
@@ -200,9 +201,12 @@ namespace Tour_Ready_Capstone.Repositories
                             SET
                                 UserId = @userId,
                                 GroupId = @groupId,
+                                GroupName = @groupName,
                                 Venue = @venue,
                                 ShowDate = @showDate,
-                                CityId = @cityId,
+                                CityName = @cityName,
+                                State = @state,
+                                Country = @country,
                                 SetList = @setList,
                                 ShowNotes = @showNotes,
                                 MerchSales = @merchSales,
@@ -213,9 +217,12 @@ namespace Tour_Ready_Capstone.Repositories
                     cmd.Parameters.AddWithValue("@id", show.Id);
                     cmd.Parameters.AddWithValue("@userId", show.UserId);
                     cmd.Parameters.AddWithValue("@groupId", show.GroupId);
+                    cmd.Parameters.AddWithValue("@groupName", show.GroupName);
                     cmd.Parameters.AddWithValue("@venue", show.Venue);
                     cmd.Parameters.AddWithValue("@showDate", show.ShowDate);
-                    cmd.Parameters.AddWithValue("@CityId", show.CityId);
+                    cmd.Parameters.AddWithValue("@cityName", show.CityName);
+                    cmd.Parameters.AddWithValue("@state", show.State);
+                    cmd.Parameters.AddWithValue("@country", show.Country);
                     cmd.Parameters.AddWithValue("@SetList", show.SetList);
                     cmd.Parameters.AddWithValue("@ShowNotes", show.ShowNotes);
                     cmd.Parameters.AddWithValue("@MerchSales", show.MerchSales);
@@ -256,7 +263,6 @@ namespace Tour_Ready_Capstone.Repositories
                 GroupName = reader.GetString(reader.GetOrdinal("GroupName")),
                 Venue = reader.GetString(reader.GetOrdinal("Venue")),
                 ShowDate = reader.GetDateTime(reader.GetOrdinal("ShowDate")),
-                CityId = reader.GetInt32(reader.GetOrdinal("CityId")),
                 CityName = reader.GetString(reader.GetOrdinal("CityName")),
                 State = reader.GetString(reader.GetOrdinal("State")),
                 Country = reader.GetString(reader.GetOrdinal("Country")),

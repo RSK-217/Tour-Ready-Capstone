@@ -8,7 +8,6 @@
         public string GroupName { get; set; }
         public string Venue { get; set; }
         public DateTime ShowDate { get; set; }
-        public int CityId { get; set; }
         public string CityName { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
