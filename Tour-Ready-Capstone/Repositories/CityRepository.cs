@@ -11,6 +11,8 @@ namespace Tour_Ready_Capstone.Repositories
                                                           CityName,
                                                           State,
                                                           Country,
+                                                          People,
+                                                          Places,
                                                           CityNotes
                                                    FROM [CITY]";
         public CityRepository(IConfiguration config) : base(config) { }
@@ -77,14 +79,16 @@ namespace Tour_Ready_Capstone.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [City] (UserId, CityName, State, Country, CityNotes)
+                    INSERT INTO [City] (UserId, CityName, State, Country, People, Places, CityNotes)
                     OUTPUT INSERTED.ID
-                    VALUES (@userId, @cityName, @state, @country, @cityNotes)";
+                    VALUES (@userId, @cityName, @state, @country, @people, @places, @cityNotes)";
 
                     cmd.Parameters.AddWithValue("@userId", city.UserId);
                     cmd.Parameters.AddWithValue("@cityName", city.CityName);
                     cmd.Parameters.AddWithValue("@state", city.State);
                     cmd.Parameters.AddWithValue("@country", city.Country);
+                    cmd.Parameters.AddWithValue("@people", city.People);
+                    cmd.Parameters.AddWithValue("@places", city.Places);
                     cmd.Parameters.AddWithValue("@cityNotes", city.CityNotes);
 
                     int id = (int)cmd.ExecuteScalar();
@@ -109,6 +113,8 @@ namespace Tour_Ready_Capstone.Repositories
                                 CityName = @cityName,
                                 State = @state,
                                 Country = @country,
+                                People = @people,
+                                Places = @places,
                                 CityNotes = @cityNotes
                             WHERE Id = @id";
                     
@@ -117,6 +123,8 @@ namespace Tour_Ready_Capstone.Repositories
                     cmd.Parameters.AddWithValue("@cityName", city.CityName);
                     cmd.Parameters.AddWithValue("@state", city.State);
                     cmd.Parameters.AddWithValue("@country", city.Country);
+                    cmd.Parameters.AddWithValue("@people", city.People);
+                    cmd.Parameters.AddWithValue("@places", city.Places);
                     cmd.Parameters.AddWithValue("@cityNotes", city.CityNotes);
 
                     cmd.ExecuteNonQuery();
@@ -152,7 +160,9 @@ namespace Tour_Ready_Capstone.Repositories
                 CityName = reader.GetString(reader.GetOrdinal("CityName")),
                 State = reader.GetString(reader.GetOrdinal("State")),
                 Country = reader.GetString(reader.GetOrdinal("Country")),
-                CityNotes = reader.GetString(reader.GetOrdinal("CityNotes"))
+                People = reader.GetString(reader.GetOrdinal("People")),
+                Places = reader.GetString(reader.GetOrdinal("Places")),
+                CityNotes = reader.GetString(reader.GetOrdinal("CityNotes")),
             };
         }
     }

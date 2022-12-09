@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tour_Ready_Capstone.Interfaces;
 using Tour_Ready_Capstone.Models;
 using Tour_Ready_Capstone.Repositories;
