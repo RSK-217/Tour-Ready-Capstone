@@ -76,11 +76,12 @@ namespace Tour_Ready_Capstone.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [Group] (GroupName, Image)
+                    INSERT INTO [Group] (UserId, GroupName, Image)
                     OUTPUT INSERTED.ID
-                    VALUES (@groupName, @image);
+                    VALUES (@userId, @groupName, @image);
                 ";
-                    ;
+
+                    cmd.Parameters.AddWithValue("@userId", group.UserId);
                     cmd.Parameters.AddWithValue("@groupName", group.GroupName);
                     cmd.Parameters.AddWithValue("@image", group.Image);
 
@@ -103,12 +104,14 @@ namespace Tour_Ready_Capstone.Repositories
                 {
                     cmd.CommandText = @"
                             UPDATE [Group]
-                            SET
+                            SET 
+                                UserId = @userId
                                 GroupName = @groupName,
                                 Image = @image
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", group.Id);
+                    cmd.Parameters.AddWithValue("@userId", group.UserId);
                     cmd.Parameters.AddWithValue("@groupName", group.GroupName);
                     cmd.Parameters.AddWithValue("@image", group.Image);
 
@@ -141,6 +144,7 @@ namespace Tour_Ready_Capstone.Repositories
             return new Group
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
                 GroupName = reader.GetString(reader.GetOrdinal("GroupName")),
                 Image = reader.GetString(reader.GetOrdinal("Image"))
             };
