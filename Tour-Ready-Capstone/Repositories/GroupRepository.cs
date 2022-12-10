@@ -7,31 +7,29 @@ namespace Tour_Ready_Capstone.Repositories
     public class GroupRepository : BaseRepository, IGroup
     {
         private readonly string _baseSqlSelect = @"SELECT Id,
+                                                    UserId,
                                                     GroupName,
                                                     Image
                                                    FROM [Group]";
         public GroupRepository(IConfiguration config) : base(config) { }
 
-        public List<GroupsByUserViewModel> GetAllGroupsByUserId(int id)
+        public List<Group> GetAllGroupsByUserId(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = $@"SELECT gm.id, userId, groupId, isEditor, g.groupName 
-                        FROM [GroupMember] gm 
-                        JOIN [Group] g ON gm.groupId = g.id  
-                        WHERE UserId = @userId";
+                    cmd.CommandText = $"{_baseSqlSelect} WHERE UserId = @userId";
 
                     cmd.Parameters.AddWithValue("@userId", id);
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var results = new List<GroupsByUserViewModel>();
+                        var results = new List<Group>();
                         while (reader.Read())
                         {
-                            var group = LoadFromDataTwo(reader);
+                            var group = LoadFromData(reader);
 
                             results.Add(group);
                         }
