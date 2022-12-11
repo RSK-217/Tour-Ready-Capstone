@@ -103,7 +103,7 @@ namespace Tour_Ready_Capstone.Repositories
                     cmd.CommandText = @"
                             UPDATE [Group]
                             SET 
-                                UserId = @userId
+                                UserId = @userId,
                                 GroupName = @groupName,
                                 Image = @image
                             WHERE Id = @id";
