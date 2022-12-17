@@ -1,4 +1,6 @@
-﻿namespace Tour_Ready_Capstone.Models
+﻿using Microsoft.VisualBasic;
+
+namespace Tour_Ready_Capstone.Models
 {
     public class Show
     {
