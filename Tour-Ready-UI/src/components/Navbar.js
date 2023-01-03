@@ -7,7 +7,7 @@ export const NavBar = ({user}) => {
    return (
         
             <Nav className="navbar">
-                <h3>Tour Ready</h3>
+                <h3 className='nav-title'>tour <i>ready</i></h3>
                 <div className="nav navbar-expand-lg">
                     <NavLink className='nav-link'
                         active

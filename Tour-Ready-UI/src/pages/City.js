@@ -11,10 +11,10 @@ export default function City() {
         .then(response => response.json())
         .then((data) => {
             setCity(data)
-            console.log(city);
         })
- }, [cityId])
-
+    }, [cityId])
+    
+    console.log(city);
 
 
     return (

@@ -11,7 +11,6 @@ import Shows from '../pages/Shows';
 import Show from '../pages/Show';
 import EditShow from '../Puts/EditShow';
 import AddShow from '../Posts/AddShow';
-import Register from '../pages/Register';
 import { getGroupById } from "../api/GroupData";
 
 export default function Routes({ user }) {
@@ -87,7 +86,6 @@ console.log(currentUser);
     <div>
       <Switch>
         <Route exact path="/" component={() => <Authenticated user={user} currentUser={currentUser}/>} />
-        <Route path="/register" component={() => <Register user={user}/>} />
         <Route path="/group/edit/:groupId(\d+)" component={() => <EditGroup />} />
         
         <Route path="/shows" component={() => <Shows currentUser={currentUser}/>} />

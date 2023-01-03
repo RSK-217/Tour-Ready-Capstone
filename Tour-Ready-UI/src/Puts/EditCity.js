@@ -20,10 +20,10 @@ export default function EditCity({ currentUser }) {
         .then(response => response.json())
         .then((data) => {
             setCity(data)
-            console.log(city);
         })
- }, [cityId])
-
+    }, [cityId])
+    
+    console.log(city);
  const Delete = () => {
     fetch(`https://localhost:7108/api/City/${cityId}`, {
     method: "DELETE"
@@ -169,7 +169,7 @@ export default function EditCity({ currentUser }) {
                 <button className="city-btn" onClick={cancelForm}>
                     Cancel
                 </button>&nbsp;
-                <button className="city-btn" onClick={handleShow}>
+                <button className="city-btn" onClick={Delete}>
                     Delete
                 </button>
             </section>
