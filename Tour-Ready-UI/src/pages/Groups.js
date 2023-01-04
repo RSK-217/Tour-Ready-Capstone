@@ -29,7 +29,7 @@ export default function Groups({ groups, currentUser }) {
                     
                     {/* <button value={group.id} key={group.id} className="edit-group-btn" type="button" onClick={editChange}>Edit Group</button> */}
                     
-                    <Link className="edit-group-link" to={`/group/edit/${group.id}`}><BiEdit></BiEdit></Link>
+                    <Link className="edit-group-link" to={`/group/edit/${group.id}`}><BiEdit></BiEdit>edit</Link>
                 </div>
             )}) : null }
             

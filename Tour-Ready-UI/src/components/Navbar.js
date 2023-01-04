@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Navbar.css"
+import "./Navbar.css";
 import { signOut } from '../utils/auth';
 import { Nav, NavItem, NavLink, NavDropdown, Button } from "react-bootstrap";
 

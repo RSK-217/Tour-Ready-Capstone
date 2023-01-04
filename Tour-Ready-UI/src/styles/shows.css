@@ -1,0 +1,9 @@
+.show-link {
+    text-decoration: none;
+    color: black;
+    
+}
+
+.listed-show {
+    list-style: circle;
+}

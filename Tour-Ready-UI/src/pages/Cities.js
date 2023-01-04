@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Link } from 'react-router-dom'
 import { getAllCities } from "../api/UserData";
+import { MdOutlineAddBox } from "react-icons/md";
+import "../styles/cities.css";
 
 export default function Cities({ currentUser }) {
    const [cities, setCities] = useState([]);
@@ -24,7 +26,7 @@ return (
                        </li>)
             }) : null } 
 
-            <Link className='add-city-link' to='/city/add'>+ add a city</Link>
+            <Link className='add-city-link' to='/city/add'><MdOutlineAddBox></MdOutlineAddBox>add city</Link>
         </>
     )
 }
