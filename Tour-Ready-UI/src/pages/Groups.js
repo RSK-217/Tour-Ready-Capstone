@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import AddGroup from "../Posts/AddGroup";
 import { Link } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
 import EditGroup from "../Puts/EditGroup";
 
 export default function Groups({ groups, currentUser }) {
@@ -28,7 +29,7 @@ export default function Groups({ groups, currentUser }) {
                     
                     {/* <button value={group.id} key={group.id} className="edit-group-btn" type="button" onClick={editChange}>Edit Group</button> */}
                     
-                    <Link className="edit-group-link" to={`/group/edit/${group.id}`}>edit</Link>
+                    <Link className="edit-group-link" to={`/group/edit/${group.id}`}><BiEdit></BiEdit></Link>
                 </div>
             )}) : null }
             

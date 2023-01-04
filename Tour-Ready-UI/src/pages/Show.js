@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {useParams, Link} from 'react-router-dom';
 import Moment from 'moment';
+import { BiEdit } from "react-icons/bi";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 
 export default function Show() {
@@ -22,7 +24,7 @@ console.log(show)
     return (
         <>
         <h1 className='show-headline'>{formatDate} - {show.venue} - {show.cityName}, {show.state} {show.country}</h1>
-            <Link className='edit-show-link' to={`/show/edit/${showId}`}>edit show</Link>
+            <Link className='edit-show-link' to={`/show/edit/${showId}`}><BiEdit></BiEdit>edit</Link>
             <div>
                 <h5 className='show-section-title'>setlist:</h5>
                     <p className='show-section-body'>{show.setList}</p>
@@ -39,7 +41,7 @@ console.log(show)
                 <h5 className='show-section-title'>payout:</h5>
                     <p className='show-section-body'>${show.payout}</p>
             </div>
-            <Link className="back-to-shows" to="/shows">back</Link>
+            <Link className="back-to-shows" to="/shows"><MdOutlineArrowBack></MdOutlineArrowBack>back</Link>
         </>
     )
 

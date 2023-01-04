@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams, Link } from 'react-router-dom';
-
+import { BiEdit } from "react-icons/bi";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 export default function City() {
     const [city, setCity] = useState({});
@@ -20,7 +21,7 @@ export default function City() {
     return (
         <>
         <h1 className="city-header">{city.cityName}, {city.state} - {city.country}</h1>
-        <Link className='edit-city-link' to={`/city/edit/${cityId}`}>edit city</Link>
+        <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <div className="city-people">
                 <h6>People</h6>
                 <li>{city.people}</li>   
@@ -33,7 +34,7 @@ export default function City() {
                 <h6>Notes</h6>
                 <li>{city.cityNotes}</li>   
             </div>
-            <Link className="back-to-cities" to="/cities">back</Link>
+            <Link className="back-to-cities" to="/cities"><MdOutlineArrowBack></MdOutlineArrowBack>back</Link>
         </>
     )
 
