@@ -4,6 +4,8 @@ import Moment from "moment";
 import { getAllShows } from "../api/UserData";
 import { getAllGroups } from "../api/UserData";
 import { ShowFilter } from "../Filters/ShowFilter";
+import { MdOutlineAddBox } from "react-icons/md";
+import "../styles/shows.css";
 
 export default function Shows({ currentUser }) {
     const [shows, setShows] = useState([]);
@@ -49,7 +51,7 @@ export default function Shows({ currentUser }) {
                        </li>)
             })} 
 
-            <Link className='add-show-link' to='/show/add'>+ add show</Link>
+            <Link className='add-show-link' to='/show/add'><MdOutlineAddBox></MdOutlineAddBox>add show</Link>
             
         </>
     )

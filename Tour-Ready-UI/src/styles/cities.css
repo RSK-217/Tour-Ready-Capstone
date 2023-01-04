@@ -1,0 +1,9 @@
+.city-link {
+    text-decoration: none;
+    color: black;
+    
+}
+
+.listed-city {
+    list-style: circle;
+}
