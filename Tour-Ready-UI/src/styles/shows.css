@@ -1,9 +1,32 @@
+.show-body {
+    padding-left: 20px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.show-title {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 15px;
+}
+
+.show-filter {
+    font-family: 'Nanum Gothic', sans-serif;
+    margin-bottom: 10px;
+}
+
 .show-link {
     text-decoration: none;
     color: black;
-    
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.add-show-link {
+    text-decoration: none;
+    margin-top: 25px;
 }
 
 .listed-show {
     list-style: circle;
+    padding-left: 20px;
 }

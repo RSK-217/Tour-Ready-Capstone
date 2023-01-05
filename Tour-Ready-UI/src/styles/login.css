@@ -1,0 +1,42 @@
+.login-title {
+    padding-top:115px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 70px;
+}
+
+.login-background {
+background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+background-size: 400% 400%;
+animation: gradient 20s ease infinite;
+height: 100vh;
+margin-top: -49px;
+}
+
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+
+100% {
+background-position: 0% 50%;
+}
+}
+
+.login-btn {
+    background-color: whitesmoke; 
+  color: black; 
+  border: 1px solid #000000;
+  border-radius: 5px;
+  transition-duration: 0.4s;
+  font-size: 15px;
+  padding: 3px 5px;
+  
+}
+
+.login-btn:hover {
+    background-color: #23a6d5;
+  color: white;
+}

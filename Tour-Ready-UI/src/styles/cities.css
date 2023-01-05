@@ -1,9 +1,27 @@
+.city-body {
+    padding-left: 20px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.city-title {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 15px;
+}
+
 .city-link {
     text-decoration: none;
     color: black;
-    
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .listed-city {
     list-style: circle;
+    padding-left: 20px;
+}
+
+.add-city-link {
+    text-decoration: none;
+    margin-top: 25px;
 }

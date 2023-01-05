@@ -1,5 +1,6 @@
 .navbar {
-    background-color: rgba(94, 255, 49, 0.387);
+    /* background-color: rgba(94, 255, 49, 0.387); */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 }
 
 .nav-title {
@@ -12,7 +13,7 @@ a.nav-link {
 }
 
 a.nav-link:hover {
-    color:#ff31b0d9;
+    color:white;
 }
 
 .profilepic {
