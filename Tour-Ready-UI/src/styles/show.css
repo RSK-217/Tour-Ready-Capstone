@@ -1,0 +1,36 @@
+.show-body {
+    padding-left: 20px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.edit-show-link {
+    text-decoration: none;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.back-to-shows {
+    text-decoration: none;
+    font-family: 'Nanum Gothic', sans-serif; 
+}
+
+.show-headline {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 10px;
+}
+
+.show-section-body {
+    padding-top: 10px;
+}
+
+.show-section-title {
+    font-family: 'Nanum Gothic', sans-serif;
+    text-decoration-line: underline;
+}
+
+.show-section-content {
+    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-size: 15px;
+    max-width: 45%;
+}

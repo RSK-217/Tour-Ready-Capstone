@@ -1,0 +1,29 @@
+.add-city-body {
+    padding-left: 20px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.city-btn {
+    margin: 10px;
+}
+
+.save-city-btn {
+    background-color:  #23d5abd9; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+    margin-right: 10px;
+    
+}
+
+.cancel-city-btn {
+    background-color: #23a5d5bf; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+    margin-right: 10px;
+}

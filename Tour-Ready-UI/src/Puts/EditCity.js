@@ -1,6 +1,7 @@
 import React, { useState, useEffect }from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import {Modal, Button} from 'react-bootstrap';
+import "../styles/editCity.css";
 
 export default function EditCity({ currentUser }) {
     const [city, setCity] = useState({});
@@ -60,11 +61,11 @@ export default function EditCity({ currentUser }) {
 
 
     return (
-        <>
+        <div className="edit-city-body">
         <form className="edit-city-form">
             <h2 className="edit-city-title">edit a city</h2>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">city
                     <input
                         onChange={
                             (e) => {
@@ -80,7 +81,7 @@ export default function EditCity({ currentUser }) {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">state/province
                     <input
                         onChange={
                             (e) => {
@@ -96,7 +97,7 @@ export default function EditCity({ currentUser }) {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">country
                     <input
                         onChange={
                             (e) => {
@@ -112,7 +113,7 @@ export default function EditCity({ currentUser }) {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">people
                     <textarea
                         onChange={
                             (e) => {
@@ -129,7 +130,7 @@ export default function EditCity({ currentUser }) {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">places
                     <textarea
                         onChange={
                             (e) => {
@@ -146,7 +147,7 @@ export default function EditCity({ currentUser }) {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group">notes
                     <textarea
                         onChange={
                             (e) => {
@@ -162,18 +163,19 @@ export default function EditCity({ currentUser }) {
                     />
                 </div>
             </fieldset>
-            <section className='add-city-btn'>
-                <button className="city-btn" onClick={UpdateCity}>
+            <section className='city-btn'>
+                <button className="save-city-btn" onClick={UpdateCity}>
                     Save
                 </button>&nbsp;
-                <button className="city-btn" onClick={cancelForm}>
+                <button className="cancel-city-btn" onClick={cancelForm}>
                     Cancel
                 </button>&nbsp;
-                <button className="city-btn" onClick={Delete}>
+                <button className="delete-city-btn" onClick={Delete}>
                     Delete
                 </button>
             </section>
         </form>
+        
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete City</Modal.Title>
@@ -188,7 +190,7 @@ export default function EditCity({ currentUser }) {
           </Button>
         </Modal.Footer>
       </Modal>
-      </>
+      </div>
     )
 
 }

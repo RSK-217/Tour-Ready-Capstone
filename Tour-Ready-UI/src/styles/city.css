@@ -1,34 +1,35 @@
-.show-body {
+.full-city-body {
     padding-left: 20px;
     background-color: rgba(245, 245, 245, 0.517);
     width: 100vw;
     min-height: 100vh;
 }
 
-.show-title {
+.city-header {
     font-family: 'Nanum Gothic', sans-serif;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
-.show-filter {
-    font-family: 'Nanum Gothic', sans-serif;
-    margin-bottom: 10px;
-}
-
-.show-link {
+.edit-city-link {
     text-decoration: none;
-    color: black;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-.add-show-link {
+.back-to-cities {
     text-decoration: none;
-    margin-top: 25px;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-.listed-show {
-    list-style: circle;
-    padding-left: 20px;
+.city-section-body {
+    padding: 10px 0 15px 0;
+}
+
+.city-section-title {
     font-family: 'Nanum Gothic', sans-serif;
+    text-decoration-line: underline;
+}
+
+.city-section-content {
+    font-size: 15px;
+    max-width: 50%;
 }

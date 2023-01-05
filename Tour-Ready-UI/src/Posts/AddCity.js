@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useHistory} from 'react-router-dom';
+import "../styles/addCity.css";
 
 export default function AddCity({currentUser}) {
     const [city, setCity] = useState({});
@@ -37,6 +38,7 @@ export default function AddCity({currentUser}) {
     }
 
     return (
+        <div className="add-city-body">
         <form className="add-city-form">
             <h2 className="add-city-title">add a city</h2>
             <fieldset>
@@ -88,14 +90,15 @@ export default function AddCity({currentUser}) {
                 </div>
             </fieldset>
             
-            <section className='add-city-btn'>
-                <button className="city-btn" onClick={saveCity}>
+            <section className='city-btn'>
+                <button className="save-city-btn" onClick={saveCity}>
                     Save
                 </button>&nbsp;
-                <button className="city-btn" onClick={cancelForm}>
+                <button className="cancel-city-btn" onClick={cancelForm}>
                     Cancel
                 </button>
             </section>
         </form>
+        </div>
     )
 }

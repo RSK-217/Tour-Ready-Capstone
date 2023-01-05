@@ -14,6 +14,7 @@ export default function Authenticated({ user, currentUser }) {
  }, [])
   
   return (
+    <div className='home-page-body'>
     <div className="text-center mt-5">
       <h1>Tour Ready</h1>
       <img
@@ -28,6 +29,7 @@ export default function Authenticated({ user, currentUser }) {
         <Groups className="groups-display" currentUser={currentUser} groups={groups} />
       </div>
           
+    </div>
     </div>
   );
 }

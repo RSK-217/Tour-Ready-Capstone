@@ -1,0 +1,14 @@
+.edit-show-body {
+    padding-left: 20px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.delete-show-btn {
+    background-color:#e0040492; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+}

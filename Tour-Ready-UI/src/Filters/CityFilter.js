@@ -1,4 +1,5 @@
 import React from 'react'
+import "../styles/cities.css";
 
 const CityFilter = ({value, setFilter}) => {
 

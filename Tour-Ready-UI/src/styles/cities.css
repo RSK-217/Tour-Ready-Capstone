@@ -25,3 +25,8 @@
     text-decoration: none;
     margin-top: 25px;
 }
+
+.city-filter {
+    font-family: 'Nanum Gothic', sans-serif;
+    margin-bottom: 10px;
+}

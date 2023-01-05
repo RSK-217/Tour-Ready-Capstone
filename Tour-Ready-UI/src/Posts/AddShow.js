@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import { getAllGroups } from "../api/UserData";
+import "../styles/addShow.css";
+
 
 export default function AddShow({currentUser}) {
     const [show, setShow] = useState({});
@@ -71,10 +73,11 @@ export default function AddShow({currentUser}) {
     }
 
     return (
+        <div className="add-form-body">
         <form className="add-show-form">
             <h2 className="add-show-title">add a show</h2>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group-select">
                 <select value={selectedGroupId} onChange={handleChange}>
                             <option value=''>select a group</option>
                     {groups.map((group) => {
@@ -165,14 +168,15 @@ export default function AddShow({currentUser}) {
                     />
                 </div>
             </fieldset>
-            <section className='add-show-btn'>
-                <button className="show-btn" onClick={saveShow}>
-                    Save
+            <section className='show-btn'>
+                <button className="save-show-btn" onClick={saveShow}>
+                    save
                 </button>&nbsp;
-                <button className="show-btn" onClick={cancelForm}>
-                    Cancel
+                <button className="cancel-show-btn" onClick={cancelForm}>
+                    cancel
                 </button>
             </section>
         </form>
+        </div>
     )
 }
