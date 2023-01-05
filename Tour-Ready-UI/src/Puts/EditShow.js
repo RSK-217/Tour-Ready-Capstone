@@ -269,7 +269,7 @@ console.log(show)
                 <button className="show-btn" onClick={cancelForm}>
                     Cancel
                 </button>&nbsp;
-                <button className="show-btn" onClick={handleShow}>
+                <button className="show-btn" onClick={Delete}>
                     Delete
                 </button>
             </section>

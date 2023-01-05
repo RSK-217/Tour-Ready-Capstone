@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/shows.css";
 
 export const ShowFilter = ({ groups, value, setFilter }) => {
 
@@ -7,7 +8,8 @@ export const ShowFilter = ({ groups, value, setFilter }) => {
         setFilter(groupFilter)
     }
     return (
-        <select value={value} onChange={handleChange}>
+        
+        <select className="show-filter" value={value} onChange={handleChange}>
             <option value={0}>All shows</option>
             {groups.map((group) => {
                         return (
@@ -15,5 +17,6 @@ export const ShowFilter = ({ groups, value, setFilter }) => {
                         )
                     })}
         </select>
+       
     )
 }
