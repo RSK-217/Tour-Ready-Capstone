@@ -10,17 +10,17 @@ export default function Cities({ currentUser }) {
     const [filter, setFilter] = useState({});
 
     const filterCities = () => {
-       if (filter === 'city') {
+        if (filter === 'city') {
             return cities.sort(function (a, b) {
-                var nameA = a.cityName.toUpperCase(); 
-                var nameB = b.cityName.toUpperCase(); 
+                var nameA = a.cityName.toUpperCase();
+                var nameB = b.cityName.toUpperCase();
                 if (nameA < nameB) {
-                    return -1; 
+                    return -1;
                 }
                 if (nameA > nameB) {
-                    return 1; 
+                    return 1;
                 }
-                return 0; 
+                return 0;
             });
         }
         else if (filter === 'state') {
@@ -28,23 +28,23 @@ export default function Cities({ currentUser }) {
                 var nameA = a.state.toUpperCase();
                 var nameB = b.state.toUpperCase();
                 if (nameA < nameB) {
-                    return -1; 
+                    return -1;
                 }
                 if (nameA > nameB) {
-                    return 1; 
+                    return 1;
                 }
-                return 0; 
+                return 0;
             });
         }
         else if (filter === 'country') {
             return cities.sort(function (a, b) {
-                var nameA = a.country.toUpperCase(); 
-                var nameB = b.country.toUpperCase(); 
+                var nameA = a.country.toUpperCase();
+                var nameB = b.country.toUpperCase();
                 if (nameA < nameB) {
-                    return -1; 
+                    return -1;
                 }
                 if (nameA > nameB) {
-                    return 1; 
+                    return 1;
                 }
                 return 0;
             });

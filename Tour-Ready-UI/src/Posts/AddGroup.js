@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 
-export default function AddGroup({currentUser, setClicked}) {
+export default function AddGroup({ currentUser, setClicked }) {
     const [group, setGroup] = useState();
-    
+
     const history = useHistory();
 
     const cancelForm = () => {
@@ -28,8 +28,8 @@ export default function AddGroup({currentUser, setClicked}) {
         }
 
         const response = await fetch('https://localhost:7108/api/Group', fetchOptions);
-            await response.json();
-            history.push('/')
+        await response.json();
+        history.push('/')
     }
 
     return (
@@ -50,11 +50,11 @@ export default function AddGroup({currentUser, setClicked}) {
                     />
                 </div>
             </fieldset>
-            <section className='add-group-btn'>
-                <button className="group-btn" onClick={saveGroup}>
+            <section className='add-group-section'>
+                <button className="save-group-btn" onClick={saveGroup}>
                     Save
                 </button>&nbsp;
-                <button className="group-btn" onClick={cancelForm}>
+                <button className="cancel-group-btn" onClick={cancelForm}>
                     Cancel
                 </button>
             </section>
