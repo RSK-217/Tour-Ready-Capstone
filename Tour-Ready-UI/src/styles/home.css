@@ -1,0 +1,85 @@
+.home-page-body {
+    padding-left: 30px;
+    background-color: rgba(245, 245, 245, 0.517);
+    width: 100vw;
+    min-height: 100vh;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.home-title {
+    margin: 25px 0 45px 0;
+}
+
+.home-content {
+    margin-left: 30px;
+    
+}
+
+.home-groups-section {
+    margin-top: 25px;
+}
+
+.group-title {
+    text-decoration: underline;
+}
+
+.group-name-section {
+    margin-left: 15px;
+}
+
+.group-name-item {  
+    display: flex;
+}
+
+.edit-group-link {
+    text-decoration: none;
+    margin-left: 10px; 
+}
+
+.add-group-btn {
+    background-color:#e0040492; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 3px 5px;
+    margin: 15px 0 20px 10px;
+}
+
+.add-group-section {
+    margin: 5px 0 0 5px;
+}
+
+.edit-group-form {
+    margin: 10px 0 10px 15px;
+}
+
+.edit-group-section {
+    margin: 10px 0 0 5px;
+}
+
+.save-group-btn {
+    background-color:  #23d5abd9; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+    margin-right: 10px;
+    
+}
+
+.cancel-group-btn {
+    background-color: #23a5d5bf; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+    margin-right: 10px;
+}
+
+.delete-group-btn {
+    background-color:#e0040492; 
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 5px;
+}

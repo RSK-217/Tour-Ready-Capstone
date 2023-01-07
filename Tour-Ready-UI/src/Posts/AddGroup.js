@@ -50,11 +50,11 @@ export default function AddGroup({currentUser, setClicked}) {
                     />
                 </div>
             </fieldset>
-            <section className='add-group-btn'>
-                <button className="group-btn" onClick={saveGroup}>
+            <section className='add-group-section'>
+                <button className="save-group-btn" onClick={saveGroup}>
                     Save
                 </button>&nbsp;
-                <button className="group-btn" onClick={cancelForm}>
+                <button className="cancel-group-btn" onClick={cancelForm}>
                     Cancel
                 </button>
             </section>

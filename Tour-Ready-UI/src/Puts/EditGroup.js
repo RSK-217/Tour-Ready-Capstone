@@ -55,6 +55,7 @@ export default function EditGroup() {
 
     return (
         <form className="edit-group-form">
+            <h2 className="edit-group-title">edit group</h2>
             <fieldset>
                 <div className="form-group">
                     <input
@@ -71,14 +72,14 @@ export default function EditGroup() {
                     />
                 </div>
             </fieldset>
-            <section className='add-group-btn'>
-                <button className="group-btn" onClick={UpdateGroup}>
+            <section className='edit-group-section'>
+                <button className="save-group-btn" onClick={UpdateGroup}>
                     Save
                 </button>&nbsp;
-                <button className="group-btn" onClick={cancelForm}>
+                <button className="cancel-group-btn" onClick={cancelForm}>
                     Cancel
                 </button>&nbsp;
-                <button className="group-btn" onClick={Delete}>
+                <button className="delete-group-btn" onClick={Delete}>
                     Delete
                 </button>
             </section>
