@@ -25,17 +25,17 @@
 }
 
 .save-show-btn {
-    background-color:  #23d5abd9; 
+    background-color: #23d5abd9;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 15px;
     padding: 3px 5px;
     margin-right: 10px;
-    
+
 }
 
 .cancel-show-btn {
-    background-color: #23a5d5bf; 
+    background-color: #23a5d5bf;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 15px;

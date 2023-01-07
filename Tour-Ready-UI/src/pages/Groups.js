@@ -25,9 +25,9 @@ export default function Groups({ groups, currentUser }) {
                 return (
                     <div className="group-name-section" key={group.id}>
                         <div className="group-name-item">
-                        <li>{group.groupName}</li>
-                        {/* <button value={group.id} key={group.id} className="edit-group-btn" type="button" onClick={editChange}>Edit Group</button> */}
-                        <Link className="edit-group-link" to={`/group/edit/${group.id}`}><BiEdit></BiEdit>edit</Link>
+                            <li>{group.groupName}</li>
+                            {/* <button value={group.id} key={group.id} className="edit-group-btn" type="button" onClick={editChange}>Edit Group</button> */}
+                            <Link className="edit-group-link" to={`/group/edit/${group.id}`}><BiEdit></BiEdit>edit</Link>
                         </div>
                     </div>
                 )

@@ -12,7 +12,7 @@
 
 .home-content {
     margin-left: 30px;
-    
+
 }
 
 .home-groups-section {
@@ -27,17 +27,17 @@
     margin-left: 15px;
 }
 
-.group-name-item {  
+.group-name-item {
     display: flex;
 }
 
 .edit-group-link {
     text-decoration: none;
-    margin-left: 10px; 
+    margin-left: 10px;
 }
 
 .add-group-btn {
-    background-color:#e0040492; 
+    background-color: #e0040492;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 13px;
@@ -58,17 +58,17 @@
 }
 
 .save-group-btn {
-    background-color:  #23d5abd9; 
+    background-color: #23d5abd9;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 15px;
     padding: 3px 5px;
     margin-right: 10px;
-    
+
 }
 
 .cancel-group-btn {
-    background-color: #23a5d5bf; 
+    background-color: #23a5d5bf;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 15px;
@@ -77,7 +77,7 @@
 }
 
 .delete-group-btn {
-    background-color:#e0040492; 
+    background-color: #e0040492;
     border: 1px solid #000000;
     border-radius: 5px;
     font-size: 15px;
