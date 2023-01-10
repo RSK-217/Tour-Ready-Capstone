@@ -14,10 +14,6 @@ export default function Groups({ groups, currentUser }) {
         setClicked(true)
     }
 
-    // const editChange = (e) => {
-    //    e.target.value === 1 ? setClickEdit(true) : null
-    // }
-
     return (
         <>
             <h1 className="group-title">Groups</h1>

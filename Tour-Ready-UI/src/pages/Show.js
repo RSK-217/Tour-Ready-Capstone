@@ -19,8 +19,6 @@ export default function Show() {
 
     const formatDate = Moment(show.showDate).format('MM-DD-YYYY')
 
-    console.log(show)
-
     return (
         <div className="show-body">
             <h1 className='show-headline'>{formatDate} - {show.venue} - {show.cityName}, {show.state} {show.country}</h1>

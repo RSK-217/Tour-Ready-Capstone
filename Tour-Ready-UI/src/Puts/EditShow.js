@@ -61,8 +61,6 @@ export default function EditShow({ currentUser }) {
             .then(history.go())
     }
 
-    console.log(show)
-
     const UpdateShow = (e) => {
         e.preventDefault()
         const newShow = {

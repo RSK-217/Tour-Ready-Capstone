@@ -11,7 +11,6 @@ import Shows from '../pages/Shows';
 import Show from '../pages/Show';
 import EditShow from '../Puts/EditShow';
 import AddShow from '../Posts/AddShow';
-import { getGroupById } from "../api/GroupData";
 
 export default function Routes({ user }) {
   const [userExists, setUserExists] = useState({});
@@ -56,7 +55,6 @@ export default function Routes({ user }) {
   }
 
   const RegisterUser = () => {
-    console.log(user);
     const newUser = {
       name: user.displayName,
       email: user.email,
@@ -78,9 +76,7 @@ export default function Routes({ user }) {
       })
   }
 
-  console.log(userExists);
   console.log(currentUser);
-
 
   return (
     <div>
@@ -102,19 +98,3 @@ export default function Routes({ user }) {
     </div>
   );
 }
-
-// useEffect(() => {
-//   fetch(`https://localhost:7108/api/User/CheckIfUserExists/${user.$.W}`,
-//   {
-//   method: 'GET',
-//   headers: {
-//     'Access-Control-Allow-Origin': 'https://localhost:7108',
-//     'Content-Type': 'application/json'
-//   },
-// },
-// )
-//     .then((res) => res.json())
-//     .then((fbUser) => {
-//       setUserExists(fbUser)
-//     })
-// }, [])

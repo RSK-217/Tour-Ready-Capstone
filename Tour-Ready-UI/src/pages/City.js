@@ -16,9 +16,6 @@ export default function City() {
             })
     }, [cityId])
 
-    console.log(city);
-
-
     return (
         <div className="full-city-body">
             <h1 className="city-header">{city.cityName}, {city.state} - {city.country}</h1>

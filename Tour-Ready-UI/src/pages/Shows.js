@@ -22,7 +22,6 @@ export default function Shows({ currentUser }) {
             return shows
         }
     }
-    console.log(filterShows())
 
     useEffect(() => {
         if (currentUser?.hasOwnProperty("id")) {
@@ -40,8 +39,6 @@ export default function Shows({ currentUser }) {
             })
         };
     }, [])
-
-    console.log(shows)
 
     return (
         <div className="show-body">
