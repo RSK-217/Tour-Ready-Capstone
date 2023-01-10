@@ -1,6 +1,6 @@
 .show-body {
     padding-left: 20px;
-    background-color: rgba(245, 245, 245, 0.517);
+    background-color: rgba(245, 245, 245, 0.518);
     width: 100vw;
     min-height: 100vh;
 }
@@ -27,10 +27,15 @@
 .show-section-title {
     font-family: 'Nanum Gothic', sans-serif;
     text-decoration-line: underline;
+    
 }
 
 .show-section-content {
-    /* font-family: 'Nanum Gothic', sans-serif; */
+    padding-left: 10px;
+    margin-bottom: 18px;
     font-size: 15px;
-    max-width: 45%;
+    max-width: 50%;
+    background-color: #b676ff1e;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 7px 0 rgba(0, 0, 0, 0.19);
 }

@@ -23,10 +23,20 @@
 
 .add-city-link {
     text-decoration: none;
-    margin-top: 25px;
+    margin-top: 40px;
 }
 
 .city-filter {
     font-family: 'Nanum Gothic', sans-serif;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cities-section {
+    /* padding: 5px 19px 5px 0;
+    font-size: 15px;
+    width: fit-content;
+    background-color: #ffffff1e;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 15px; */
 }

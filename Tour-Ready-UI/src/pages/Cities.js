@@ -64,11 +64,13 @@ export default function Cities({ currentUser }) {
         <div className="city-body">
             <h1 className="city-title">Cities</h1>
             <CityFilter value={filter} setFilter={setFilter} />
+            <div className="cities-section">
             {filterCities().map((city) => {
                 return (<li key={city.id} className='listed-city'>
                     <Link className='city-link' to={`/city/${city.id}`}>{city.cityName}, {city.state} - {city.country}</Link>
                 </li>)
             })}
+            </div>
 
             <Link className='add-city-link' to='/city/add'><MdOutlineAddBox></MdOutlineAddBox>add</Link>
         </div>
