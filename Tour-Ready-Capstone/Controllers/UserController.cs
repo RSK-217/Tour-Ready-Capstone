@@ -68,6 +68,13 @@ namespace Tour_Ready_Capstone.Controllers
         
         }
 
-        
+        // DELETE api/<UserController>/5
+        [HttpDelete("{id}")]
+        public void DeleteUser(int id)
+        {
+            _userRepo.DeleteUser(id);
+        }
+
+
     }
 }

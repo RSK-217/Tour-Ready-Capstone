@@ -168,6 +168,26 @@ namespace Tour_Ready_Capstone.Repositories
                 }
             }
         }
+
+        public void DeleteUser(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM [User]
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         private User LoadFromData(SqlDataReader reader)
         {
             return new User
