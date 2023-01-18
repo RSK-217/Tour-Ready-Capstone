@@ -156,10 +156,10 @@ namespace Tour_Ready_Capstone.Repositories
 
         public Show CreateShow(Show show)
         {
-            using (SqlConnection conn = Connection)
+            using SqlConnection conn = Connection;
             {
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                using SqlCommand cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"
                     INSERT INTO [Show] (UserId, GroupId, GroupName, Venue, ShowDate, CityName, State, Country, SetList, ShowNotes, MerchSales, Payout, IsFavorite)
@@ -190,11 +190,11 @@ namespace Tour_Ready_Capstone.Repositories
 
         public void UpdateShow(Show show)
         {
-            using (SqlConnection conn = Connection)
+            using SqlConnection conn = Connection;
             {
                 conn.Open();
 
-                using (SqlCommand cmd = conn.CreateCommand())
+                using SqlCommand cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"
                             UPDATE [Show]
