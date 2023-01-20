@@ -4,17 +4,17 @@ using Microsoft.Data.SqlClient;
 
 namespace Tour_Ready_Capstone.Repositories
 {
-    public class PeopleRepository : BaseRepository, IPeople
+    public class PlaceRepository : BaseRepository , IPlace
     {
         private readonly string _baseSqlSelect = @"SELECT id,
-                                                       person,
-                                                       details,
-                                                       cityId
-                                                FROM [People]";
+                                                          placeName,
+                                                          details,
+                                                          cityId
+                                                    FROM [Places]";
 
-        public PeopleRepository(IConfiguration config) : base(config) { }
-        
-        public People GetPersonById(int id)
+        public PlaceRepository(IConfiguration configuration) : base(configuration) { }
+
+        public Place GetPlaceById(int id)
         {
             using SqlConnection conn = Connection;
             {
@@ -27,20 +27,21 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using SqlDataReader reader = cmd.ExecuteReader();
                     {
-                        People? result = null;
+                        Place? result = null;
                         if (reader.Read())
                         {
                             return LoadFromData(reader);
                         }
 
                         return result;
-
                     }
                 }
+
             }
+
         }
 
-        public List<People> GetAllPeopleByCityId(int id) 
+        public List<Place> GetAllPlacesByCityId(int id)
         {
             using SqlConnection conn = Connection;
             {
@@ -53,11 +54,11 @@ namespace Tour_Ready_Capstone.Repositories
 
                     using SqlDataReader reader = cmd.ExecuteReader();
                     {
-                        var results = new List<People>();
-                        while (reader.Read()) 
+                        var results = new List<Place>();
+                        while (reader.Read())
                         {
-                            var people = LoadFromData(reader);
-                            results.Add(people);
+                            var place = LoadFromData(reader);
+                            results.Add(place);
                         }
 
                         return results;
@@ -66,31 +67,31 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
-        public People CreatePerson(People people) 
+        public Place CreatePlace(Place place)
         {
-            using SqlConnection conn = Connection;
+            using SqlConnection connection = Connection;
             {
-                conn.Open();
-                using SqlCommand cmd = conn.CreateCommand();
+                connection.Open();
+                using SqlCommand cmd = connection.CreateCommand();
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [People] (Person, Details, CityId)
+                    INSERT INTO [Places] (PlaceName, Details, CityId)
                     OUTPUT INSERTED.ID
-                    VALUES (@person, @details, @cityId)";
+                    VALUES (@placeName, @details, @cityId)";
 
-                    cmd.Parameters.AddWithValue("@person", people.Person);
-                    cmd.Parameters.AddWithValue("@details", people.Details);
-                    cmd.Parameters.AddWithValue("@cityId", people.CityId);
+                    cmd.Parameters.AddWithValue("@placeName", place.PlaceName);
+                    cmd.Parameters.AddWithValue("@details", place.Details);
+                    cmd.Parameters.AddWithValue("@cityId", place.CityId);
 
                     int id = (int)cmd.ExecuteScalar();
 
-                    people.Id = id;
-                    return people;
+                    place.Id = id;
+                    return place;
                 }
             }
         }
 
-        public void UpdatePerson(People people)
+        public void UpdatePlace(Place place)
         {
             using SqlConnection conn = Connection;
             {
@@ -98,34 +99,32 @@ namespace Tour_Ready_Capstone.Repositories
                 using SqlCommand cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"
-                            UPDATE [People]
+                            UPDATE [Places]
                             SET
-                                Person = @person,
+                                PlaceName = @placeName,
                                 Details = @details,
                                 CityId = @cityId
                             WHERE Id = @id";
-
-                    cmd.Parameters.AddWithValue("@id", people.Id);
-                    cmd.Parameters.AddWithValue("@person", people.Person);
-                    cmd.Parameters.AddWithValue("@details", people.Details);
-                    cmd.Parameters.AddWithValue("@cityId", people.CityId);
-
-                    cmd.ExecuteNonQuery();
                 }
+
+                cmd.Parameters.AddWithValue("@id", place.Id);
+                cmd.Parameters.AddWithValue("@placeName", place.PlaceName);
+                cmd.Parameters.AddWithValue("@details", place.Details);
+                cmd.Parameters.AddWithValue("@cityId", place.CityId);
+
+                cmd.ExecuteNonQuery();
             }
         }
 
-        public void DeletePerson(int id)
+        public void DeletePlace(int id)
         {
             using SqlConnection conn = Connection;
             {
                 conn.Open();
-
                 using SqlCommand cmd = conn.CreateCommand();
                 {
-                    cmd.CommandText = @"
-                            DELETE FROM [People]
-                            WHERE Id = @id";
+                    cmd.CommandText = @"DELETE FROM [Places]
+                                        WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -134,12 +133,12 @@ namespace Tour_Ready_Capstone.Repositories
             }
         }
 
-        private People LoadFromData(SqlDataReader reader)
+        private Place LoadFromData(SqlDataReader reader)
         {
-            return new People
+            return new Place
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Person = reader.GetString(reader.GetOrdinal("Person")),
+                PlaceName = reader.GetString(reader.GetOrdinal("PlaceName")),
                 Details = reader.GetString(reader.GetOrdinal("Details")),
                 CityId = reader.GetInt32(reader.GetOrdinal("CityId"))
             };
