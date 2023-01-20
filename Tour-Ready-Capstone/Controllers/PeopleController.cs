@@ -21,7 +21,7 @@ namespace Tour_Ready_Capstone.Controllers
 
         }
 
-        // GET api/<ShowController>/5
+        // GET api/<PeopleController>/5
         [HttpGet("GetPeopleById/{id}")]
         public ActionResult GetPersonById(int id)
         {
@@ -29,7 +29,7 @@ namespace Tour_Ready_Capstone.Controllers
             return Ok(people);
         }
 
-        // GET: api/<ShowController>/5
+        // GET: api/<PeopleController>/5
         [HttpGet("GetPeopleByCityId/{id}")]
         public ActionResult GetAllPeopleByCityId(int id)
         {
