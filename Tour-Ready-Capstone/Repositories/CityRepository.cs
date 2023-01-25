@@ -130,11 +130,22 @@ namespace Tour_Ready_Capstone.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                            
+                            DELETE FROM [People]
+                            WHERE cityId = @cityId
+
+                            DELETE FROM [Places]
+                            WHERE cityId = @cityId
+
+                            DELETE FROM [Notes]
+                            WHERE cityId = @cityId
+
                             DELETE FROM [City]
                             WHERE Id = @id
                         ";
 
                     cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@cityId", id);
 
                     cmd.ExecuteNonQuery();
                 }
