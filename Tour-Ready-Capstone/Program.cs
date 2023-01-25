@@ -36,8 +36,8 @@ builder.Services.AddTransient<IGroupMember, GroupMemberRepository>();
 builder.Services.AddTransient<IShow, ShowRepository>();
 builder.Services.AddTransient<ICity, CityRepository>();
 builder.Services.AddTransient<IPeople, PeopleRepository>();
-builder.Services.AddTransient<IPlace, PlaceRepository>();   
-
+builder.Services.AddTransient<IPlace, PlaceRepository>();
+builder.Services.AddTransient<INotes, NotesRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
