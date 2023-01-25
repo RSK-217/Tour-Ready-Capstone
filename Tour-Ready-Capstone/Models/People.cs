@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public string? Person { get; set; }
-        public string? Details { get; set; }
         public int CityId { get; set; }
 
     }

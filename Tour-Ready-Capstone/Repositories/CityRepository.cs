@@ -1,6 +1,7 @@
 ﻿using Tour_Ready_Capstone.Models;
 using Tour_Ready_Capstone.Interfaces;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Identity;
 
 namespace Tour_Ready_Capstone.Repositories
 {
@@ -162,5 +163,6 @@ namespace Tour_Ready_Capstone.Repositories
                 Country = reader.GetString(reader.GetOrdinal("Country"))
             };
         }
+
     }
 }
