@@ -40,10 +40,7 @@ export default function EditCity({ currentUser }) {
             userId: city.userId,
             cityName: city.cityName,
             state: city.state,
-            country: city.country,
-            people: city.people,
-            places: city.places,
-            cityNotes: city.cityNotes
+            country: city.country
         }
 
         fetch(`https://localhost:7108/api/City/${cityId}`, {
@@ -109,57 +106,6 @@ export default function EditCity({ currentUser }) {
                             type="text"
                             className="form-control"
                             value={city.country}
-                        />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">people
-                        <textarea
-                            onChange={
-                                (e) => {
-                                    const copy = { ...city }
-                                    copy.people = e.target.value
-                                    setCity(copy)
-                                }}
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            value={city.people}
-                            placeholder="important people"
-                        />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">places
-                        <textarea
-                            onChange={
-                                (e) => {
-                                    const copy = { ...city }
-                                    copy.places = e.target.value
-                                    setCity(copy)
-                                }}
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            value={city.places}
-                            placeholder="places to remember"
-                        />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">notes
-                        <textarea
-                            onChange={
-                                (e) => {
-                                    const copy = { ...city }
-                                    copy.cityNotes = e.target.value
-                                    setCity(copy)
-                                }}
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            value={city.cityNotes}
-                            placeholder="notes"
                         />
                     </div>
                 </fieldset>

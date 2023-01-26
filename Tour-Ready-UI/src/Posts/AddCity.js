@@ -18,9 +18,6 @@ export default function AddCity({ currentUser }) {
             cityName: city.cityName,
             state: city.state,
             country: city.country,
-            people: "",
-            places: "",
-            cityNotes: ""
         }
 
         const fetchOptions = {
