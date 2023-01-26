@@ -8,7 +8,6 @@ namespace Tour_Ready_Capstone.Repositories
     {
         private readonly string _baseSqlSelect = @"SELECT id,
                                                           placeName,
-                                                          details,
                                                           cityId
                                                     FROM [Places]";
 
@@ -75,12 +74,11 @@ namespace Tour_Ready_Capstone.Repositories
                 using SqlCommand cmd = connection.CreateCommand();
                 {
                     cmd.CommandText = @"
-                    INSERT INTO [Places] (PlaceName, Details, CityId)
+                    INSERT INTO [Places] (PlaceName, CityId)
                     OUTPUT INSERTED.ID
-                    VALUES (@placeName, @details, @cityId)";
+                    VALUES (@placeName, @cityId)";
 
                     cmd.Parameters.AddWithValue("@placeName", place.PlaceName);
-                    cmd.Parameters.AddWithValue("@details", place.Details);
                     cmd.Parameters.AddWithValue("@cityId", place.CityId);
 
                     int id = (int)cmd.ExecuteScalar();
@@ -102,14 +100,12 @@ namespace Tour_Ready_Capstone.Repositories
                             UPDATE [Places]
                             SET
                                 PlaceName = @placeName,
-                                Details = @details,
                                 CityId = @cityId
                             WHERE Id = @id";
                 }
 
                 cmd.Parameters.AddWithValue("@id", place.Id);
                 cmd.Parameters.AddWithValue("@placeName", place.PlaceName);
-                cmd.Parameters.AddWithValue("@details", place.Details);
                 cmd.Parameters.AddWithValue("@cityId", place.CityId);
 
                 cmd.ExecuteNonQuery();
@@ -139,7 +135,6 @@ namespace Tour_Ready_Capstone.Repositories
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 PlaceName = reader.GetString(reader.GetOrdinal("PlaceName")),
-                Details = reader.GetString(reader.GetOrdinal("Details")),
                 CityId = reader.GetInt32(reader.GetOrdinal("CityId"))
             };
         }
