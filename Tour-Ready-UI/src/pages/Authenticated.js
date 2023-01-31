@@ -13,7 +13,7 @@ export default function Authenticated({ user, currentUser }) {
         setGroups(res);
       })
     };
-  }, [])
+  }, [groups])
 
   return (
     <div className='home-page-body'>
