@@ -53,8 +53,8 @@ export default function City() {
             <h1 className="city-header">{city.cityName}, {city.state} - {city.country}</h1>
             <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <section className="city-section-body">
-                <div className="city-people">
-                    <h6 className="city-section-title">People</h6>
+                <h6 className="city-section-title">People</h6>
+                <div className="city-section-box">
                     {people ? people.map((person) => {
                         return (
                             <div className="city-section-content" key={person.id}>
@@ -64,15 +64,14 @@ export default function City() {
                                 onChange={handleChange}
                                 checked={selectedValue === person.person}
                             />
-                            <p>{person.person}</p>
-                            {selectedValue === person.person ? <><BiEdit></BiEdit><MdDelete></MdDelete><MdCancel onClick={() => setSelectedValue(null)}></MdCancel></> : null}
+                            <p className="city-text">{person.person}</p>
+                            {selectedValue === person.person ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
                             </div>
                         )
                     }) : null}
-                </div>
-            
-                <div className="city-places">
-                    <h6 className="city-section-title">Places</h6>
+                </div>          
+                <h6 className="city-section-title">Places</h6>
+                <div className="city-section-box">
                     {place ? place.map((aPlace) => {
                         return (
                             <div className="city-section-content" key={aPlace.id}>
@@ -82,15 +81,15 @@ export default function City() {
                                 onChange={handleChange}
                                 checked={selectedValue === aPlace.placeName}
                             />
-                            <p>{aPlace.placeName}</p>
-                            {selectedValue === aPlace.placeName ? <><BiEdit></BiEdit><MdDelete></MdDelete><MdCancel onClick={() => setSelectedValue(null)}></MdCancel></> : null}
+                            <p className="city-text">{aPlace.placeName}</p>
+                            {selectedValue === aPlace.placeName ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
                             </div>
                         )
                     }) : null}
                     
                 </div>
-                <div className="city-notes">
-                    <h6 className="city-section-title">Notes</h6>
+                <h6 className="city-section-title">Notes</h6>
+                <div className="city-section-box">
                     {note ? note.map((aNote) => {
                         return (
                             <div className="city-section-content" key={aNote.id}>
@@ -100,8 +99,8 @@ export default function City() {
                                 onChange={handleChange}
                                 checked={selectedValue === aNote.note}
                             />
-                            <p>{aNote.note}</p>
-                            {selectedValue === aNote.note ? <><BiEdit></BiEdit><MdDelete></MdDelete><MdCancel onClick={() => setSelectedValue(null)}></MdCancel></> : null}
+                            <p className="city-text">{aNote.note}</p>
+                            {selectedValue === aNote.note ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
                             </div>
                         )
                     }) : null}
