@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import { BiEdit } from "react-icons/bi";
-import { MdOutlineArrowBack, MdOutlineAddBox, MdDelete } from "react-icons/md";
+import { MdOutlineArrowBack, MdOutlineAddBox, MdDelete, MdCancel } from "react-icons/md";
 import "../styles/city.css";
 
 export default function City() {
@@ -9,7 +9,12 @@ export default function City() {
     const [people, setPeople] = useState([]);
     const [place, setPlace] = useState([]);
     const [note, setNote] = useState([]);
+    const [selectedValue, setSelectedValue] = useState(null);
     const { cityId } = useParams()
+
+    const handleChange = (e) => {
+        setSelectedValue(e.target.value);
+      };
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/City/GetCityById/${cityId}`)
@@ -48,30 +53,55 @@ export default function City() {
             <h1 className="city-header">{city.cityName}, {city.state} - {city.country}</h1>
             <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <section className="city-section-body">
-                <div className="city-people">
-                    <h6 className="city-section-title">People</h6>
+                <h6 className="city-section-title">People</h6>
+                <div className="city-section-box">
                     {people ? people.map((person) => {
                         return (
-                            <li className="city-section-content">{person.person}</li>
+                            <div className="city-section-content" key={person.id}>
+                            <input
+                                type="radio"
+                                value={person.person}
+                                onChange={handleChange}
+                                checked={selectedValue === person.person}
+                            />
+                            <p className="city-text">{person.person}</p>
+                            {selectedValue === person.person ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
+                            </div>
                         )
                     }) : null}
-                </div>
-                <div className="city-places">
-                    <h6 className="city-section-title">Places</h6>
+                </div>          
+                <h6 className="city-section-title">Places</h6>
+                <div className="city-section-box">
                     {place ? place.map((aPlace) => {
                         return (
-                            <div>
-                            <li className="city-section-content">{aPlace.placeName}</li><BiEdit></BiEdit><MdOutlineAddBox></MdOutlineAddBox><MdDelete></MdDelete>         
+                            <div className="city-section-content" key={aPlace.id}>
+                            <input
+                                type="radio"
+                                value={aPlace.placeName}
+                                onChange={handleChange}
+                                checked={selectedValue === aPlace.placeName}
+                            />
+                            <p className="city-text">{aPlace.placeName}</p>
+                            {selectedValue === aPlace.placeName ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
                             </div>
                         )
                     }) : null}
                     
                 </div>
-                <div className="city-notes">
-                    <h6 className="city-section-title">Notes</h6>
+                <h6 className="city-section-title">Notes</h6>
+                <div className="city-section-box">
                     {note ? note.map((aNote) => {
                         return (
-                            <li className="city-section-content">{aNote.note}</li>
+                            <div className="city-section-content" key={aNote.id}>
+                            <input
+                                type="radio"
+                                value={aNote.note}
+                                onChange={handleChange}
+                                checked={selectedValue === aNote.note}
+                            />
+                            <p className="city-text">{aNote.note}</p>
+                            {selectedValue === aNote.note ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
+                            </div>
                         )
                     }) : null}
                 </div>

@@ -30,6 +30,12 @@
 }
 
 .city-section-content {
+    display: flex;
+    padding: 5px 0 5px 0;
+    
+}
+
+.city-section-box {
     padding-left: 10px;
     margin-bottom: 15px;
     font-size: 15px;
@@ -37,4 +43,14 @@
     background-color: #b676ff1e;
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 7px 0 rgba(0, 0, 0, 0.19);
+}
+
+p.city-text {
+    padding: 0 0 0 10px;
+    margin-bottom: 0;
+}
+
+.city-icons {
+    padding-left: 20px;
+
 }
