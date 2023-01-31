@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { BiEdit } from "react-icons/bi";
 import { MdOutlineArrowBack, MdOutlineAddBox, MdDelete, MdCancel } from "react-icons/md";
 import "../styles/city.css";
+import AddPeople from "../Posts/AddPeople";
 
 export default function City() {
     const [city, setCity] = useState({});
@@ -10,11 +11,16 @@ export default function City() {
     const [place, setPlace] = useState([]);
     const [note, setNote] = useState([]);
     const [selectedValue, setSelectedValue] = useState(null);
+    const [clickPerson, setClickPerson] = useState(false)
     const { cityId } = useParams()
 
     const handleChange = (e) => {
         setSelectedValue(e.target.value);
       };
+
+    const addPerson = () => {
+        setClickPerson(true)
+    }
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/City/GetCityById/${cityId}`)
@@ -54,6 +60,9 @@ export default function City() {
             <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <section className="city-section-body">
                 <h6 className="city-section-title">People</h6>
+                <MdOutlineAddBox onClick={addPerson}>add</MdOutlineAddBox>
+                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson}/> : null}
+                {clickPerson}
                 <div className="city-section-box">
                     {people ? people.map((person) => {
                         return (

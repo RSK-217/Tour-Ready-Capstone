@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 
-export default function AddGroup({ currentUser, setClicked }) {
+export default function AddGroup({ currentUser, setClicked}) {
     const [group, setGroup] = useState();
 
     const history = useHistory();
@@ -29,7 +29,7 @@ export default function AddGroup({ currentUser, setClicked }) {
 
         const response = await fetch('https://localhost:7108/api/Group', fetchOptions);
         await response.json();
-        history.push('/')
+        setClicked(false);
     }
 
     return (
