@@ -28,7 +28,7 @@ export default function City() {
             .then((data) => {
                 setCity(data)
             })
-    }, [cityId])
+    }, [])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
@@ -36,7 +36,7 @@ export default function City() {
         .then((data) => {
             setPeople(data)
         })
-    }, [cityId])
+    }, [people])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Place/GetPlacesByCityId/${cityId}`)
@@ -44,7 +44,7 @@ export default function City() {
         .then((data) => {
             setPlace(data)
         })
-    }, [cityId])
+    }, [place])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Notes/GetNotesByCityId/${cityId}`)
@@ -52,7 +52,7 @@ export default function City() {
         .then((data) => {
             setNote(data)
         })
-    }, [cityId])
+    }, [note])
 
     return (
         <div className="full-city-body">
@@ -61,7 +61,7 @@ export default function City() {
             <section className="city-section-body">
                 <h6 className="city-section-title">People</h6>
                 <MdOutlineAddBox onClick={addPerson}>add</MdOutlineAddBox>
-                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson}/> : null}
+                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson} cityId={cityId} /> : null}
                 {clickPerson}
                 <div className="city-section-box">
                     {people ? people.map((person) => {
