@@ -4,6 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { MdOutlineArrowBack, MdOutlineAddBox, MdDelete, MdCancel } from "react-icons/md";
 import "../styles/city.css";
 import AddPeople from "../Posts/AddPeople";
+import EditPeople from "../Puts/EditPeople";
 
 export default function City() {
     const [city, setCity] = useState({});
@@ -11,7 +12,8 @@ export default function City() {
     const [place, setPlace] = useState([]);
     const [note, setNote] = useState([]);
     const [selectedValue, setSelectedValue] = useState(null);
-    const [clickPerson, setClickPerson] = useState(false)
+    const [clickPerson, setClickPerson] = useState(false);
+    const [editPerson, setEditPerson] = useState(false);
     const { cityId } = useParams()
 
     const handleChange = (e) => {
@@ -20,6 +22,10 @@ export default function City() {
 
     const addPerson = () => {
         setClickPerson(true)
+    }
+
+    const editSelection = () => {
+        setEditPerson(true)
     }
 
     useEffect(() => {
@@ -36,7 +42,7 @@ export default function City() {
         .then((data) => {
             setPeople(data)
         })
-    }, [people])
+    }, [])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Place/GetPlacesByCityId/${cityId}`)
@@ -44,7 +50,7 @@ export default function City() {
         .then((data) => {
             setPlace(data)
         })
-    }, [place])
+    }, [])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Notes/GetNotesByCityId/${cityId}`)
@@ -52,7 +58,7 @@ export default function City() {
         .then((data) => {
             setNote(data)
         })
-    }, [note])
+    }, [])
 
     return (
         <div className="full-city-body">
@@ -73,11 +79,16 @@ export default function City() {
                                 onChange={handleChange}
                                 checked={selectedValue === person.person}
                             />
-                            <p className="city-text">{person.person}</p>
-                            {selectedValue === person.person ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
+                            {selectedValue === person.person && editPerson === true ? 
+                                <EditPeople setEditPerson={setEditPerson} person={person} people={people}/> : <p className="city-text">{person.person}</p>}
+                            
+                            {selectedValue === person.person && editPerson === false ? 
+                                <div className="city-icons"><BiEdit onClick={editSelection}></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;
+                                <MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
                             </div>
                         )
                     }) : null}
+                    
                 </div>          
                 <h6 className="city-section-title">Places</h6>
                 <div className="city-section-box">

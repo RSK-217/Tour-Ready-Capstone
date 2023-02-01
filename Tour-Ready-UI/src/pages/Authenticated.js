@@ -8,12 +8,12 @@ export default function Authenticated({ user, currentUser }) {
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
-    if (currentUser?.hasOwnProperty("id")) {
+    if (currentUser?.hasOwnProperty("id") && groups.length + 1) {
       getAllGroups(currentUser).then((res) => {
         setGroups(res);
-      })
-    };
-  }, [groups])
+      });
+    }
+  }, []);
 
   return (
     <div className='home-page-body'>
