@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MdCancel, MdCheck } from 'react-icons/md'
 
-export default function AddPeople({ setClickPerson, cityId }) {
+export default function AddPeople({ setClickPerson, setDidUpdate, cityId }) {
   const [people, setPeople] = useState({});
 
   const Cancel = () => {
@@ -26,7 +26,8 @@ export default function AddPeople({ setClickPerson, cityId }) {
 
     const response = await fetch('https://localhost:7108/api/People', fetchOptions);
     await response.json();
-    setClickPerson(null)
+    setClickPerson(null);
+    setDidUpdate(true);
 }
 
   return (

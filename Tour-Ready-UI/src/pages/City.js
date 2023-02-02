@@ -56,8 +56,6 @@ export default function City() {
             }
           }, [didUpdate]);
 
-      console.log(didUpdate)
-
     useEffect(() => {
         fetch(`https://localhost:7108/api/Place/GetPlacesByCityId/${cityId}`)
         .then(response => response.json())
@@ -74,14 +72,16 @@ export default function City() {
         })
     }, [])
 
+    console.log(didUpdate)
+
     return (
         <div className="full-city-body">
             <h1 className="city-header">{city.cityName}, {city.state} - {city.country}</h1>
             <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <section className="city-section-body">
                 <h6 className="city-section-title">People</h6>
-                <MdOutlineAddBox onClick={addPerson}>add</MdOutlineAddBox>
-                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson} cityId={cityId} /> : null}
+                <MdOutlineAddBox onClick={addPerson} >add</MdOutlineAddBox>
+                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson} setDidUpdate={setDidUpdate} cityId={cityId} /> : null}
                 {clickPerson}
                 <div className="city-section-box">
                     {people ? people.map((person) => {
@@ -97,9 +97,9 @@ export default function City() {
                                 <EditPeople setEditPerson={setEditPerson} setDidUpdate={setDidUpdate} person={person} people={people}/> : <p className="city-text">{person.person}</p>}
                             
                             {selectedValue === person.person && editPerson === false ? 
-                                <div className="city-icons"><BiEdit onClick={editSelection}></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;
-                                <MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
-                            </div>
+                                <div className="city-icons"><BiEdit onClick={editSelection}></BiEdit>&nbsp;
+                                    <MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
+                                </div>
                         )
                     }) : null}
                     

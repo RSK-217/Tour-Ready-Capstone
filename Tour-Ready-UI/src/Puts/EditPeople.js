@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { MdCancel, MdCheck, MdPeople } from 'react-icons/md'
+import { MdCancel, MdCheck, MdDelete } from 'react-icons/md'
 
 export default function EditPeople({setEditPerson, setDidUpdate, person}) {
   const [personToEdit, setPersonToEdit] = useState({
@@ -11,8 +11,16 @@ export default function EditPeople({setEditPerson, setDidUpdate, person}) {
   const Cancel = () => {
         setEditPerson(false)
       }
-      
-
+  
+      const DeletePerson = () => {
+        fetch(`https://localhost:7108/api/People/${person.id}`, {
+            method: "DELETE"
+        })
+            .then(
+                setEditPerson(false),
+                setDidUpdate(true))
+            
+    }    
       const UpdatePerson = (e) => {
         e.preventDefault()
         const newPerson = {
@@ -56,6 +64,7 @@ export default function EditPeople({setEditPerson, setDidUpdate, person}) {
                 </fieldset>
     </form>
     <MdCheck onClick={UpdatePerson}></MdCheck>
+    <MdDelete onClick={DeletePerson}></MdDelete>
     <MdCancel onClick={Cancel}></MdCancel>
     </div>
   )
