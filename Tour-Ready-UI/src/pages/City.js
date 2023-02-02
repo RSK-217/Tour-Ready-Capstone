@@ -4,6 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { MdOutlineArrowBack, MdOutlineAddBox, MdDelete, MdCancel } from "react-icons/md";
 import "../styles/city.css";
 import AddPeople from "../Posts/AddPeople";
+import EditPeople from "../Puts/EditPeople";
 
 export default function City() {
     const [city, setCity] = useState({});
@@ -11,7 +12,9 @@ export default function City() {
     const [place, setPlace] = useState([]);
     const [note, setNote] = useState([]);
     const [selectedValue, setSelectedValue] = useState(null);
-    const [clickPerson, setClickPerson] = useState(false)
+    const [clickPerson, setClickPerson] = useState(false);
+    const [editPerson, setEditPerson] = useState(false);
+    const [didUpdate, setDidUpdate] = useState(false);
     const { cityId } = useParams()
 
     const handleChange = (e) => {
@@ -22,21 +25,36 @@ export default function City() {
         setClickPerson(true)
     }
 
+    const editSelection = () => {
+        setEditPerson(true)
+    }
+
     useEffect(() => {
         fetch(`https://localhost:7108/api/City/GetCityById/${cityId}`)
             .then(response => response.json())
             .then((data) => {
                 setCity(data)
             })
-    }, [cityId])
+    }, [])
 
     useEffect(() => {
-        fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
-        .then(response => response.json())
-        .then((data) => {
-            setPeople(data)
-        })
-    }, [cityId])
+          fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
+            .then(response => response.json())
+            .then((data) => {
+              setPeople(data);
+            });
+        }, []);
+
+        useEffect(() => {
+            if (didUpdate) {
+              fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
+                .then(response => response.json())
+                .then((data) => {
+                  setPeople(data);
+                  setDidUpdate(false);
+                });
+            }
+          }, [didUpdate]);
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Place/GetPlacesByCityId/${cityId}`)
@@ -44,7 +62,7 @@ export default function City() {
         .then((data) => {
             setPlace(data)
         })
-    }, [cityId])
+    }, [])
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Notes/GetNotesByCityId/${cityId}`)
@@ -52,7 +70,9 @@ export default function City() {
         .then((data) => {
             setNote(data)
         })
-    }, [cityId])
+    }, [])
+
+    console.log(didUpdate)
 
     return (
         <div className="full-city-body">
@@ -60,8 +80,8 @@ export default function City() {
             <Link className='edit-city-link' to={`/city/edit/${cityId}`}><BiEdit></BiEdit>edit</Link>
             <section className="city-section-body">
                 <h6 className="city-section-title">People</h6>
-                <MdOutlineAddBox onClick={addPerson}>add</MdOutlineAddBox>
-                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson}/> : null}
+                <MdOutlineAddBox onClick={addPerson} >add</MdOutlineAddBox>
+                {clickPerson === true ? <AddPeople setClickPerson={setClickPerson} setDidUpdate={setDidUpdate} cityId={cityId} /> : null}
                 {clickPerson}
                 <div className="city-section-box">
                     {people ? people.map((person) => {
@@ -73,11 +93,16 @@ export default function City() {
                                 onChange={handleChange}
                                 checked={selectedValue === person.person}
                             />
-                            <p className="city-text">{person.person}</p>
-                            {selectedValue === person.person ? <div className="city-icons"><BiEdit></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;<MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
-                            </div>
+                            {selectedValue === person.person && editPerson === true ? 
+                                <EditPeople setEditPerson={setEditPerson} setDidUpdate={setDidUpdate} person={person} people={people}/> : <p className="city-text">{person.person}</p>}
+                            
+                            {selectedValue === person.person && editPerson === false ? 
+                                <div className="city-icons"><BiEdit onClick={editSelection}></BiEdit>&nbsp;
+                                    <MdCancel onClick={() => setSelectedValue(null)}></MdCancel></div> : null}
+                                </div>
                         )
                     }) : null}
+                    
                 </div>          
                 <h6 className="city-section-title">Places</h6>
                 <div className="city-section-box">

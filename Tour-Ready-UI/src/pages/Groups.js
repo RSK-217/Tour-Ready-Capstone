@@ -6,9 +6,7 @@ import EditGroup from "../Puts/EditGroup";
 import "../styles/home.css";
 
 export default function Groups({ groups, currentUser }) {
-    const [clicked, setClicked] = useState(false)
-    const [clickEdit, setClickEdit] = useState(false)
-    const [reset, setReset] = useState([])
+    const [clicked, setClicked] = useState(false);
 
     const handleChange = () => {
         setClicked(true)

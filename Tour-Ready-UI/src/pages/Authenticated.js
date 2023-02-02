@@ -4,6 +4,7 @@ import { getAllGroups } from "../api/UserData";
 import Groups from "./Groups";
 import "../styles/home.css";
 
+
 export default function Authenticated({ user, currentUser }) {
   const [groups, setGroups] = useState([]);
 
@@ -11,9 +12,9 @@ export default function Authenticated({ user, currentUser }) {
     if (currentUser?.hasOwnProperty("id")) {
       getAllGroups(currentUser).then((res) => {
         setGroups(res);
-      })
-    };
-  }, [groups])
+      });
+    }
+  }, []);
 
   return (
     <div className='home-page-body'>
