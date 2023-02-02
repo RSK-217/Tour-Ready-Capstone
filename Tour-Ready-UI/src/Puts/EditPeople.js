@@ -1,8 +1,12 @@
 import React, {useState} from 'react'
 import { MdCancel, MdCheck, MdPeople } from 'react-icons/md'
 
-export default function EditPeople({setEditPerson, person, people}) {
-  const [personToEdit, setPersonToEdit] = useState({});
+export default function EditPeople({setEditPerson, setDidUpdate, person}) {
+  const [personToEdit, setPersonToEdit] = useState({
+    id: person.id,
+    person: person.person,
+    cityId: person.cityId
+  });
 
   const Cancel = () => {
         setEditPerson(false)
@@ -12,10 +16,12 @@ export default function EditPeople({setEditPerson, person, people}) {
       const UpdatePerson = (e) => {
         e.preventDefault()
         const newPerson = {
-            person: people.person
+            id: personToEdit.id,
+            person: personToEdit.person,
+            cityId: personToEdit.cityId
         }
 
-        fetch(`https://localhost:7108/api/City/${person.id}`, {
+        fetch(`https://localhost:7108/api/People/${person.id}`, {
             method: "PUT",
             headers: {
                 'Access-Control-Allow-Origin': 'https://localhost:7108',
@@ -23,11 +29,12 @@ export default function EditPeople({setEditPerson, person, people}) {
             },
             body: JSON.stringify(newPerson)
         })
-            // .then(() => {
-                
-            // })
+            .then(
+                setEditPerson(false),
+                setDidUpdate(true)
+                )
+            
     }
-
     
   return (
     <div>
@@ -41,10 +48,9 @@ export default function EditPeople({setEditPerson, person, people}) {
                                     copy.person = e.target.value
                                     setPersonToEdit(copy)
                                 }}
-                            required autoFocus
                             type="text"
                             className="form-control"
-                            value="person"
+                            value={personToEdit.person}
                         />
                     </div>
                 </fieldset>

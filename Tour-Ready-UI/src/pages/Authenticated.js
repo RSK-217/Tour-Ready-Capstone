@@ -4,11 +4,12 @@ import { getAllGroups } from "../api/UserData";
 import Groups from "./Groups";
 import "../styles/home.css";
 
+
 export default function Authenticated({ user, currentUser }) {
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
-    if (currentUser?.hasOwnProperty("id") && groups.length + 1) {
+    if (currentUser?.hasOwnProperty("id")) {
       getAllGroups(currentUser).then((res) => {
         setGroups(res);
       });

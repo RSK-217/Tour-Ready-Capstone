@@ -14,6 +14,7 @@ export default function City() {
     const [selectedValue, setSelectedValue] = useState(null);
     const [clickPerson, setClickPerson] = useState(false);
     const [editPerson, setEditPerson] = useState(false);
+    const [didUpdate, setDidUpdate] = useState(false);
     const { cityId } = useParams()
 
     const handleChange = (e) => {
@@ -37,12 +38,25 @@ export default function City() {
     }, [])
 
     useEffect(() => {
-        fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
-        .then(response => response.json())
-        .then((data) => {
-            setPeople(data)
-        })
-    }, [])
+          fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
+            .then(response => response.json())
+            .then((data) => {
+              setPeople(data);
+            });
+        }, []);
+
+        useEffect(() => {
+            if (didUpdate) {
+              fetch(`https://localhost:7108/api/People/GetPeopleByCityId/${cityId}`)
+                .then(response => response.json())
+                .then((data) => {
+                  setPeople(data);
+                  setDidUpdate(false);
+                });
+            }
+          }, [didUpdate]);
+
+      console.log(didUpdate)
 
     useEffect(() => {
         fetch(`https://localhost:7108/api/Place/GetPlacesByCityId/${cityId}`)
@@ -80,7 +94,7 @@ export default function City() {
                                 checked={selectedValue === person.person}
                             />
                             {selectedValue === person.person && editPerson === true ? 
-                                <EditPeople setEditPerson={setEditPerson} person={person} people={people}/> : <p className="city-text">{person.person}</p>}
+                                <EditPeople setEditPerson={setEditPerson} setDidUpdate={setDidUpdate} person={person} people={people}/> : <p className="city-text">{person.person}</p>}
                             
                             {selectedValue === person.person && editPerson === false ? 
                                 <div className="city-icons"><BiEdit onClick={editSelection}></BiEdit>&nbsp;<MdDelete></MdDelete>&nbsp;
