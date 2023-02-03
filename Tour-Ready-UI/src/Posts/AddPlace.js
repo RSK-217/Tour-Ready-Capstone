@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { MdCancel, MdCheck } from 'react-icons/md'
 
-export default function AddPlace({ setClickPerson, setDidUpdate, cityId }) {
+export default function AddPlace({ setClickPlace, setPlaceDidUpdate, cityId }) {
   const [place, setPlace] = useState({});
 
   const Cancel = () => {
-    setClickPerson(null)
+    setClickPlace(false)
   }
 
   const savePlace = async (e) => {
@@ -26,8 +26,8 @@ export default function AddPlace({ setClickPerson, setDidUpdate, cityId }) {
 
     const response = await fetch('https://localhost:7108/api/Place', fetchOptions);
     await response.json();
-    setClickPerson(null);
-    setDidUpdate(true);
+    setClickPlace(false);
+    setPlaceDidUpdate(true);
 }
 
   return (

@@ -1,45 +1,45 @@
 import React, {useState} from 'react'
 import { MdCancel, MdCheck, MdDelete } from 'react-icons/md'
 
-export default function EditPlace ({setEdit, setPlaceDidUpdate, aPlace}) {
-  const [placeToEdit, setPlaceToEdit] = useState({
-    id: aPlace.id,
-    placeName: aPlace.placeName,
-    cityId: aPlace.cityId
+export default function EditNotes ({setEdit, setNoteDidUpdate, aNote}) {
+  const [noteToEdit, setNoteToEdit] = useState({
+    id: aNote.id,
+    note: aNote.note,
+    cityId: aNote.cityId
   });
 
   const Cancel = () => {
         setEdit(false)
       }
   
-      const DeletePlace = () => {
-        fetch(`https://localhost:7108/api/Place/${aPlace.id}`, {
+      const DeleteNote = () => {
+        fetch(`https://localhost:7108/api/Notes/${aNote.id}`, {
             method: "DELETE"
         })
             .then(
                 setEdit(false),
-                setPlaceDidUpdate(true))
+                setNoteDidUpdate(true))
             
     }    
-    const UpdatePlace = async (e) => {
+    const UpdateNote = async (e) => {
         e.preventDefault();
-        const newPlace = {
-          id: placeToEdit.id,
-          placeName: placeToEdit.placeName,
-          cityId: placeToEdit.cityId,
+        const newNote = {
+          id: noteToEdit.id,
+          note: noteToEdit.note,
+          cityId: noteToEdit.cityId,
         };
       
         try {
-          await fetch(`https://localhost:7108/api/Place/${aPlace.id}`, {
+          await fetch(`https://localhost:7108/api/Notes/${aNote.id}`, {
             method: "PUT",
             headers: {
               "Access-Control-Allow-Origin": "https://localhost:7108",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newPlace),
+            body: JSON.stringify(newNote),
           });
           setEdit(false);
-          setPlaceDidUpdate(true);
+          setNoteDidUpdate(true);
         } catch (error) {
           console.error("There was a problem with the fetch operation:", error);
         }
@@ -54,19 +54,19 @@ export default function EditPlace ({setEdit, setPlaceDidUpdate, aPlace}) {
                         <input
                             onChange={
                                 (e) => {
-                                    const copy = { ...placeToEdit }
-                                    copy.placeName = e.target.value
-                                    setPlaceToEdit(copy)
+                                    const copy = { ...noteToEdit }
+                                    copy.note = e.target.value
+                                    setNoteToEdit(copy)
                                 }}
                             type="text"
                             className="form-control"
-                            value={placeToEdit.placeName}
+                            value={noteToEdit.note}
                         />
                     </div>
                 </fieldset>
     </form>
-    <MdCheck onClick={UpdatePlace}></MdCheck>
-    <MdDelete onClick={DeletePlace}></MdDelete>
+    <MdCheck onClick={UpdateNote}></MdCheck>
+    <MdDelete onClick={DeleteNote}></MdDelete>
     <MdCancel onClick={Cancel}></MdCancel>
     </div>
   )
