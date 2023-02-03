@@ -61,8 +61,8 @@ export default function EditShow({ currentUser }) {
             .then(history.go())
     }
 
-    const UpdateShow = (e) => {
-        e.preventDefault()
+    async function UpdateShow(e) {
+        e.preventDefault();
         const newShow = {
             id: show.id,
             userId: show.userId,
@@ -77,23 +77,29 @@ export default function EditShow({ currentUser }) {
             showNotes: show.showNotes,
             merchSales: show.merchSales,
             payout: show.payout,
-            isFavorite: show.isFavorite
+            isFavorite: show.isFavorite,
+        };
+
+        try {
+            const response = await fetch(
+                `https://localhost:7108/api/Show/${showId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Access-Control-Allow-Origin": "https://localhost:7108",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newShow),
+                }
+            );
+            if (response.ok) {
+                history.push(`/show/${ showId }`);
+            }
+        } catch (error) {
+            console.error(error);
         }
-
-        fetch(`https://localhost:7108/api/Show/${showId}`, {
-            method: "PUT",
-            headers: {
-                'Access-Control-Allow-Origin': 'https://localhost:7108',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newShow)
-        })
-            .then(() => {
-                history.push(`/show/${showId}`)
-            })
     }
-
-
+    
     return (
         <div className="edit-show-body">
             <form className="edit-show-form">

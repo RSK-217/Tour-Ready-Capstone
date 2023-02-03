@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { MdCancel, MdCheck } from 'react-icons/md'
 
-export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }) {
-  const [people, setPeople] = useState({});
+export default function AddPlace({ setClickPlace, setPlaceDidUpdate, cityId }) {
+  const [place, setPlace] = useState({});
 
   const Cancel = () => {
-    setClickPerson(false)
+    setClickPlace(false)
   }
 
-  const savePerson = async (e) => {
+  const savePlace = async (e) => {
     e.preventDefault()
-    const newPerson = {
-        person: people.person,
+    const newPlace = {
+        placeName: place.placeName,
         cityId: cityId
     }
 
@@ -21,13 +21,13 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
             'Access-Control-Allow-Origin': 'https://localhost:7108',
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newPerson)
+        body: JSON.stringify(newPlace)
     }
 
-    const response = await fetch('https://localhost:7108/api/People', fetchOptions);
+    const response = await fetch('https://localhost:7108/api/Place', fetchOptions);
     await response.json();
-    setClickPerson(false);
-    setPeopleDidUpdate(true);
+    setClickPlace(false);
+    setPlaceDidUpdate(true);
 }
 
   return (
@@ -38,9 +38,9 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
                         <input
                             onChange={
                                 (e) => {
-                                    const copy = { ...people }
-                                    copy.person = e.target.value
-                                    setPeople(copy)
+                                    const copy = { ...place }
+                                    copy.placeName = e.target.value
+                                    setPlace(copy)
                                 }}
                             required autoFocus
                             type="text"
@@ -50,9 +50,8 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
                     </div>
                 </fieldset>
     </form>
-    <MdCheck onClick={savePerson}></MdCheck>
+    <MdCheck onClick={savePlace}></MdCheck>
     <MdCancel onClick={Cancel}></MdCancel>
     </div>
   )
 }
-

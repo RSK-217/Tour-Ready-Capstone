@@ -29,29 +29,30 @@ export default function EditGroup() {
     }
 
 
-    const UpdateGroup = (e) => {
-        e.preventDefault()
+    const UpdateGroup = async (e) => {
+        e.preventDefault();
         const newGroup = {
-            id: group.id,
-            userId: group.userId,
-            groupName: group.groupName,
-            image: group.image
-
-        }
-
-        fetch(`https://localhost:7108/api/Group/${groupId}`, {
+          id: group.id,
+          userId: group.userId,
+          groupName: group.groupName,
+          image: group.image,
+        };
+      
+        try {
+          await fetch(`https://localhost:7108/api/Group/${groupId}`, {
             method: "PUT",
             headers: {
-                'Access-Control-Allow-Origin': 'https://localhost:7108',
-                'Content-Type': 'application/json'
+              "Access-Control-Allow-Origin": "https://localhost:7108",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(newGroup)
-        })
-            .then(() => {
-                history.push(`/`)
-            })
-    }
-
+            body: JSON.stringify(newGroup),
+          });
+          history.push(`/`);
+        } catch (error) {
+          console.error("There was a problem with the fetch operation:", error);
+        }
+      };
+      
 
     return (
         <form className="edit-group-form">

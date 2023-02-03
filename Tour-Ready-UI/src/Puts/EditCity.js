@@ -33,28 +33,31 @@ export default function EditCity({ currentUser }) {
             .then(history.go())
     }
 
-    const UpdateCity = (e) => {
-        e.preventDefault()
+    const UpdateCity = async (e) => {
+        e.preventDefault();
         const newCity = {
-            id: city.id,
-            userId: city.userId,
-            cityName: city.cityName,
-            state: city.state,
-            country: city.country
-        }
-
-        fetch(`https://localhost:7108/api/City/${cityId}`, {
+          id: city.id,
+          userId: city.userId,
+          cityName: city.cityName,
+          state: city.state,
+          country: city.country,
+        };
+      
+        try {
+          await fetch(`https://localhost:7108/api/City/${cityId}`, {
             method: "PUT",
             headers: {
-                'Access-Control-Allow-Origin': 'https://localhost:7108',
-                'Content-Type': 'application/json'
+              "Access-Control-Allow-Origin": "https://localhost:7108",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(newCity)
-        })
-            .then(() => {
-                history.push(`/city/${cityId}`)
-            })
-    }
+            body: JSON.stringify(newCity),
+          });
+          history.push(`/city/${cityId}`);
+        } catch (error) {
+          console.error("There was a problem with the fetch operation:", error);
+        }
+      };
+      
 
 
     return (

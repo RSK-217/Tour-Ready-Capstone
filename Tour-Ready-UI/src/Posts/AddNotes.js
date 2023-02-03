@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { MdCancel, MdCheck } from 'react-icons/md'
 
-export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }) {
-  const [people, setPeople] = useState({});
+export default function AddNotes({ setClickNote, setNoteDidUpdate, cityId }) {
+  const [note, setNote] = useState({});
 
   const Cancel = () => {
-    setClickPerson(false)
+    setClickNote(false)
   }
 
-  const savePerson = async (e) => {
+  const saveNote = async (e) => {
     e.preventDefault()
-    const newPerson = {
-        person: people.person,
+    const newNote = {
+        note: note.note,
         cityId: cityId
     }
 
@@ -21,13 +21,13 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
             'Access-Control-Allow-Origin': 'https://localhost:7108',
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newPerson)
+        body: JSON.stringify(newNote)
     }
 
-    const response = await fetch('https://localhost:7108/api/People', fetchOptions);
+    const response = await fetch('https://localhost:7108/api/Notes', fetchOptions);
     await response.json();
-    setClickPerson(false);
-    setPeopleDidUpdate(true);
+    setClickNote(false);
+    setNoteDidUpdate(true);
 }
 
   return (
@@ -38,9 +38,9 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
                         <input
                             onChange={
                                 (e) => {
-                                    const copy = { ...people }
-                                    copy.person = e.target.value
-                                    setPeople(copy)
+                                    const copy = { ...note }
+                                    copy.note = e.target.value
+                                    setNote(copy)
                                 }}
                             required autoFocus
                             type="text"
@@ -50,9 +50,8 @@ export default function AddPeople({ setClickPerson, setPeopleDidUpdate, cityId }
                     </div>
                 </fieldset>
     </form>
-    <MdCheck onClick={savePerson}></MdCheck>
+    <MdCheck onClick={saveNote}></MdCheck>
     <MdCancel onClick={Cancel}></MdCancel>
     </div>
   )
 }
-
