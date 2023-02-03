@@ -7,6 +7,7 @@ import "../styles/home.css";
 
 export default function Authenticated({ user, currentUser }) {
   const [groups, setGroups] = useState([]);
+ 
 
   useEffect(() => {
     if (currentUser?.hasOwnProperty("id")) {
