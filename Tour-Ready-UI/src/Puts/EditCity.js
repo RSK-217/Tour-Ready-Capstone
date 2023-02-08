@@ -5,9 +5,21 @@ import "../styles/editCity.css";
 
 export default function EditCity() {
     const [city, setCity] = useState({});
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleDelete = () => {
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+    };
+
+    const handleConfirmDelete = () => {
+        Delete();
+
+    };
+
     const { cityId } = useParams();
 
     const history = useHistory();
@@ -26,41 +38,42 @@ export default function EditCity() {
 
     const Delete = () => {
         fetch(`https://localhost:7108/api/City/${cityId}`, {
-          method: "DELETE"
+            method: "DELETE"
         })
-          .then(() => {
-            history.push("/cities");
-          });
-      };
-      
-      
+            .then(() => {
+                
+                history.push("/cities");
+            });
+    };
+
+
 
     const UpdateCity = async (e) => {
         e.preventDefault();
         const newCity = {
-          id: city.id,
-          userId: city.userId,
-          cityName: city.cityName,
-          state: city.state,
-          country: city.country,
+            id: city.id,
+            userId: city.userId,
+            cityName: city.cityName,
+            state: city.state,
+            country: city.country,
         };
-      
+
         try {
-          await fetch(`https://localhost:7108/api/City/${cityId}`, {
-            method: "PUT",
-            headers: {
-              "Access-Control-Allow-Origin": "https://localhost:7108",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newCity),
-          });
-          history.push(`/city/${cityId}`);
+            await fetch(`https://localhost:7108/api/City/${cityId}`, {
+                method: "PUT",
+                headers: {
+                    "Access-Control-Allow-Origin": "https://localhost:7108",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newCity),
+            });
+            history.push(`/city/${cityId}`);
         } catch (error) {
-          console.error("There was a problem with the fetch operation:", error);
+            console.error("There was a problem with the fetch operation:", error);
         }
-      };
-      
-      console.log(show)
+    };
+
+
 
     return (
         <div className="edit-city-body">
@@ -121,22 +134,22 @@ export default function EditCity() {
                     <button className="cancel-city-btn" onClick={cancelForm}>
                         Cancel
                     </button>&nbsp;
-                    <button className="delete-city-btn" onClick={handleShow}>
+                    <button className="delete-city-btn" onClick={Delete}>
                         Delete
                     </button>
                 </section>
             </form>
 
-            <Modal show={show} onHide={handleClose} backdrop="static">
+            <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete City</Modal.Title>
+                    <Modal.Title>Confirm Delete</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to delete this city</Modal.Body>
+                <Modal.Body>Are you sure you want to delete this city?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Cancel
                     </Button>
-                    <Button variant="primary" onClick={Delete}>
+                    <Button variant="danger" onClick={handleConfirmDelete}>
                         Delete
                     </Button>
                 </Modal.Footer>
