@@ -1,89 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { MdCancel, MdDelete, MdCheck } from "react-icons/md";
 
-export default function EditGroup() {
-    const [group, setGroup] = useState({})
-
-    const { groupId } = useParams();
-
-    const history = useHistory();
-
-    const cancelForm = () => {
-        history.push("/")
-    }
-
-    useEffect(() => {
-        fetch(`https://localhost:7108/api/Group/GetGroupById/${groupId}`)
-            .then(response => response.json())
-            .then((data) => {
-                setGroup(data)
+export default function EditGroup( {setEditClick, setGroupsDidUpdate, group} ) {
+    const [groupToEdit, setGroupToEdit] = useState({
+        id: group.id,
+        groupName: group.groupName,
+        userId: group.userId
+      });
+    
+      const Cancel = () => {
+            setEditClick(false)
+          }
+      
+          const DeleteGroup = () => {
+            fetch(`https://localhost:7108/api/Group/${group.id}`, {
+                method: "DELETE"
             })
-    }, [groupId])
-
-    const Delete = () => {
-        fetch(`https://localhost:7108/api/Group/${groupId}`, {
-            method: "DELETE"
-        })
-            .then(history.push("/"))
-            .then(history.go())
-    }
-
-
-    const UpdateGroup = async (e) => {
-        e.preventDefault();
-        const newGroup = {
-          id: group.id,
-          userId: group.userId,
-          groupName: group.groupName,
-          image: group.image,
+                .then(
+                    setEditClick(false),
+                    setGroupsDidUpdate(true))
+                
+        }    
+    
+        const UpdateGroup = async (e) => {
+          e.preventDefault();
+          const newGroup = {
+            id: groupToEdit.id,
+            groupName: groupToEdit.groupName,
+            userId: groupToEdit.userId,
+            image: ""
+          };
+        
+          try {
+            await fetch(`https://localhost:7108/api/Group/${group.id}`, {
+              method: "PUT",
+              headers: {
+                "Access-Control-Allow-Origin": "https://localhost:7108",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newGroup),
+            });
+            setEditClick(false);
+            setGroupsDidUpdate(true);
+          } catch (error) {
+            console.error("There was a problem with the fetch operation:", error);
+          }
         };
-      
-        try {
-          await fetch(`https://localhost:7108/api/Group/${groupId}`, {
-            method: "PUT",
-            headers: {
-              "Access-Control-Allow-Origin": "https://localhost:7108",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newGroup),
-          });
-          history.push(`/`);
-        } catch (error) {
-          console.error("There was a problem with the fetch operation:", error);
-        }
-      };
-      
-
-    return (
-        <form className="edit-group-form">
-            <h2 className="edit-group-title">edit group</h2>
-            <fieldset>
-                <div className="form-group">
-                    <input
-                        onChange={
-                            (e) => {
-                                const copy = { ...group }
-                                copy.groupName = e.target.value
-                                setGroup(copy)
-                            }}
-                        autoFocus
-                        type="text"
-                        className="form-control"
-                        value={group.groupName}
-                    />
-                </div>
-            </fieldset>
-            <section className='edit-group-section'>
-                <button className="save-group-btn" onClick={UpdateGroup}>
-                    Save
-                </button>&nbsp;
-                <button className="cancel-group-btn" onClick={cancelForm}>
-                    Cancel
-                </button>&nbsp;
-                <button className="delete-group-btn" onClick={Delete}>
-                    Delete
-                </button>
-            </section>
+        
+        
+      return (
+        <div>
+        <form className="edit-city-form">
+                    <fieldset>
+                        <div className="form-group">
+                            <input
+                                onChange={
+                                    (e) => {
+                                        const copy = { ...groupToEdit }
+                                        copy.groupName = e.target.value
+                                        setGroupToEdit(copy)
+                                    }}
+                                type="text"
+                                className="form-control"
+                                value={groupToEdit.groupName}
+                            />
+                        </div>
+                    </fieldset>
         </form>
-    )
-}
+        <MdCheck onClick={UpdateGroup}></MdCheck>
+        <MdDelete onClick={DeleteGroup}></MdDelete>
+        <MdCancel onClick={Cancel}></MdCancel>
+        </div>
+      )
+    }
+    
+    

@@ -7,7 +7,7 @@ import "../styles/home.css";
 
 export default function Authenticated({ user, currentUser }) {
   const [groups, setGroups] = useState([]);
- 
+  const [groupsDidUpdate, setGroupsDidUpdate] = useState(false);
 
   useEffect(() => {
     if (currentUser?.hasOwnProperty("id")) {
@@ -16,6 +16,18 @@ export default function Authenticated({ user, currentUser }) {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if(groupsDidUpdate) {
+    fetch(`https://localhost:7108/api/Group/GetAllGroupsByUserId/${currentUser.id}`)
+    .then(response => response.json())
+    .then((data) => {
+      setGroups(data);
+      setGroupsDidUpdate(false);
+    });}
+}, [groupsDidUpdate])
+
+console.log(groupsDidUpdate)
 
   return (
     <div className='home-page-body'>
@@ -33,7 +45,7 @@ export default function Authenticated({ user, currentUser }) {
         <h5>{currentUser.email}</h5>
         </div>
         <div className='home-groups-section'>
-          <Groups className="groups-display" currentUser={currentUser} groups={groups} />
+          <Groups className="groups-display" currentUser={currentUser} setGroupsDidUpdate={setGroupsDidUpdate} setGroups={setGroups} groups={groups} />
         </div>
         
         </section>
