@@ -76,8 +76,6 @@ export default function Routes({ user }) {
       })
   }
 
-  console.log(currentUser);
-
   return (
     <div>
       <Switch>
@@ -92,7 +90,7 @@ export default function Routes({ user }) {
         <Route exact path="/cities" component={() => <Cities currentUser={currentUser} />} />
         <Route path="/city/:cityId(\d+)" component={() => <City />} />
         <Route path="/city/add" component={() => <AddCity currentUser={currentUser} />} />
-        <Route path="/city/edit/:cityId(\d+)" component={() => <EditCity currentUser={currentUser} />} />
+        <Route path="/city/edit/:cityId(\d+)" component={() => <EditCity />} />
         <Route path="*" component={() => <Authenticated user={user} currentUser={currentUser} />} />
       </Switch>
     </div>

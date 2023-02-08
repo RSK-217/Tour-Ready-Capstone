@@ -34,8 +34,6 @@ export default function EditShow({ currentUser }) {
         })
     }, [show])
 
-    console.log(currentGroup)
-
     useEffect(() => {
         if (currentUser?.hasOwnProperty("id")) {
             getAllGroups(currentUser).then((res) => {

@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import "../styles/editCity.css";
 
-export default function EditCity({ currentUser }) {
+export default function EditCity() {
     const [city, setCity] = useState({});
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -24,14 +24,16 @@ export default function EditCity({ currentUser }) {
             })
     }, [cityId])
 
-    console.log(city);
     const Delete = () => {
         fetch(`https://localhost:7108/api/City/${cityId}`, {
-            method: "DELETE"
+          method: "DELETE"
         })
-            .then(history.push("/cities"))
-            .then(history.go())
-    }
+          .then(() => {
+            history.push("/cities");
+          });
+      };
+      
+      
 
     const UpdateCity = async (e) => {
         e.preventDefault();
@@ -58,7 +60,7 @@ export default function EditCity({ currentUser }) {
         }
       };
       
-
+      console.log(show)
 
     return (
         <div className="edit-city-body">
@@ -119,13 +121,13 @@ export default function EditCity({ currentUser }) {
                     <button className="cancel-city-btn" onClick={cancelForm}>
                         Cancel
                     </button>&nbsp;
-                    <button className="delete-city-btn" onClick={Delete}>
+                    <button className="delete-city-btn" onClick={handleShow}>
                         Delete
                     </button>
                 </section>
             </form>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} backdrop="static">
                 <Modal.Header closeButton>
                     <Modal.Title>Delete City</Modal.Title>
                 </Modal.Header>
