@@ -40,10 +40,8 @@ export default function EditCity() {
         fetch(`https://localhost:7108/api/City/${cityId}`, {
             method: "DELETE"
         })
-            .then(() => {
-                
-                history.push("/cities");
-            });
+            .then(history.push("/cities"))
+            .then(history.go("/cities"))
     };
 
 
